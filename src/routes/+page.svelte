@@ -1,18 +1,35 @@
 <script>
+    import { onMount } from "svelte";
+    import { register } from "swiper/element/bundle";
     import {
+        ChevronDown,
+        ChevronUp,
         PhoneCall,
         Mail,
         Calendar,
         Users,
         Award,
-        ChevronLeft,
-        ChevronRight,
-        ChevronDown,
-        ChevronUp,
+        Lightbulb, 
+        ChartArea,
+        Brain, 
+        Plane, 
+        MessageSquare, 
+        UserCheck 
     } from "lucide-svelte";
+    import "swiper/css";
+    import "swiper/css/navigation";
+    import "swiper/css/pagination";
 
+    register();
+
+    $: outerWidth = 0;
+    $: innerWidth = 0;
+    $: outerHeight = 0;
+    $: innerHeight = 0;
     let activeTestimonial = 0;
-    let testimonialMaxLength = 80;
+    let swiperEl;
+    let testimonialMaxLength = innerWidth < 768 ? 30 : 50;
+
     const testimonials = [
         {
             name: "Richard O'Brien",
@@ -46,29 +63,111 @@
         },
     ];
 
+    const services = [
+        { 
+            icon: Lightbulb, 
+            title: "Interview Awareness", 
+            description: "Greater awareness of interview elements" 
+        },
+        { 
+            icon: ChartArea, 
+            title: "Process Understanding", 
+            description: "Understanding of the interview process" 
+        },
+        { 
+            icon: Brain, 
+            title: "Competency Knowledge", 
+            description: "Knowledge of competency-based structure" 
+        },
+        { 
+            icon: Plane, 
+            title: "Airline-Specific Prep", 
+            description: "Tailored preparation for specific airlines" 
+        },
+        { 
+            icon: MessageSquare, 
+            title: "Feedback Strategies", 
+            description: "Feedback and improvement strategies" 
+        },
+        { 
+            icon: UserCheck, 
+            title: "Mock Interviews", 
+            description: "Mock interview sessions" 
+        }
+    ];
+
     let expandedTestimonials = Array(testimonials.length).fill(false);
+    let swiper;
 
     function toggleTestimonial(index) {
         expandedTestimonials[index] = !expandedTestimonials[index];
         expandedTestimonials = expandedTestimonials;
+        if (swiper) {
+            setTimeout(() => swiper.update(), 0);
+        }
     }
 
-    function previousTestimonial() {
-        activeTestimonial =
-            activeTestimonial > 0
-                ? activeTestimonial - 1
-                : testimonials.length - 1;
-        expandedTestimonials = Array(testimonials.length).fill(false);
+    const onProgress = (e) => {
+        const [swiperInstance, progress] = e.detail;
+        console.log(progress);
+    };
+
+    const onSlideChange = (e) => {
+        console.log("slide changed");
+    };
+
+    function updateSwiper() {
+        if (swiperEl && swiperEl.swiper) {
+            swiperEl.swiper.update();
+        }
     }
 
-    function nextTestimonial() {
-        activeTestimonial =
-            activeTestimonial < testimonials.length - 1
-                ? activeTestimonial + 1
-                : 0;
-        expandedTestimonials = Array(testimonials.length).fill(false);
+    onMount(() => {
+        swiperEl = document.querySelector("swiper-container");
+        Object.assign(swiperEl, {
+            slidesPerView: 1,
+            spaceBetween: 30,
+            pagination: {
+                clickable: true,
+            },
+            navigation: true,
+            breakpoints: {
+                640: {
+                    slidesPerView: 1,
+                },
+                1024: {
+                    slidesPerView: 1,
+                },
+            },
+        });
+        swiperEl.initialize();
+    });
+
+    function getVisibleLinkedInPosts() {
+        if (typeof window !== "undefined") {
+            if (window.innerWidth < 768) return 1;
+            if (window.innerWidth < 1024) return 2;
+            return 3;
+        }
+        return 3; // Default to 3 for SSR
+    }
+
+    let visibleLinkedInPosts = getVisibleLinkedInPosts();
+
+    // Update visible posts on window resize
+    if (typeof window !== "undefined") {
+        window.addEventListener("resize", () => {
+            visibleLinkedInPosts = getVisibleLinkedInPosts();
+        });
     }
 </script>
+
+<svelte:window
+    bind:innerWidth
+    bind:outerWidth
+    bind:innerHeight
+    bind:outerHeight
+/>
 
 <div class="container">
     <video
@@ -97,13 +196,29 @@
         <div class="card main-card">
             <h1>PILOT INTERVIEW PREPARATION</h1>
             <p>
-                As the <strong>aviation industry</strong> has been rejuvenated since lockdown, I have been providing <strong>Interview Preparation support</strong> to pilots. Many pilots re-entering or moving jobs within the industry require assistance with their <strong>interview skills</strong>.<br><br>
-                These pilots often have the required <strong>ratings and flying experience</strong> but are surprised to fail at the <strong>final interview stage</strong>. This situation is compounded by the lack of feedback, which can lead to repeated rejections.<br><br>
-                This scenario can be reversed through greater awareness of the <strong>interview elements, process, and knowledge of competency-based structure</strong>. My preparation services aim to equip pilots with the tools they need to <strong>excel in their interviews</strong> and advance their careers.
+                As the <strong>aviation industry</strong> has been rejuvenated
+                since lockdown, I have been providing
+                <strong>Interview Preparation support</strong>
+                to pilots. Many pilots re-entering or moving jobs within the industry
+                require assistance with their
+                <strong>interview skills</strong>.<br /><br />
+                These pilots often have the required
+                <strong>ratings and flying experience</strong>
+                but are surprised to fail at the
+                <strong>final interview stage</strong>. This situation is
+                compounded by the lack of feedback, which can lead to repeated
+                rejections.<br /><br />
+                This scenario can be reversed through greater awareness of the
+                <strong
+                    >interview elements, process, and knowledge of
+                    competency-based structure</strong
+                >. My preparation services aim to equip pilots with the tools
+                they need to <strong>excel in their interviews</strong> and advance
+                their careers.
             </p>
         </div>
 
-        <div class="features">
+        <div class="features-card">
             {#each [{ icon: Calendar, title: "Flexible Scheduling", description: "Book your preparation sessions at times that suit your schedule." }, { icon: Users, title: "Experienced Mentors", description: "Learn from industry professionals with years of experience." }, { icon: Award, title: "Proven Success", description: "Our clients have succeeded with major airlines worldwide." }] as { icon: Icon, title, description }}
                 <div class="card feature-card">
                     <svelte:component this={Icon} class="icon" />
@@ -113,76 +228,193 @@
             {/each}
         </div>
 
-        <div class="card">
+        <div class="card services-card">
             <h2>Our Services</h2>
-            <ul class="services-list">
-                {#each ["Greater awareness of interview elements", "Understanding of the interview process", "Knowledge of competency-based structure", "Tailored preparation for specific airlines", "Feedback and improvement strategies", "Mock interview sessions"] as service}
-                    <li>{service}</li>
+            <div class="services-grid">
+                {#each services as service}
+                    <div class="service-item">
+                        <div class="service-icon">
+                            <svelte:component this={service.icon} size={32} />
+                        </div>
+                        <h3>{service.title}</h3>
+                        <p>{service.description}</p>
+                    </div>
                 {/each}
-            </ul>
+            </div>
         </div>
 
         <div class="card">
             <h2>Success Stories</h2>
-            <div class="testimonials">
-                <div
-                    class="testimonial-slider"
-                    style="transform: translateX(-{activeTestimonial * 100}%)"
-                >
-                    {#each testimonials as testimonial, i}
-                        <div class="testimonial">
-                            <div
-                                class="testimonial-content"
-                                class:expanded={expandedTestimonials[i]}
-                            >
-                                <div class="testimonial-inner">
-                                    <blockquote>
-                                        {@html expandedTestimonials[i]
-                                            ? testimonial.quote
-                                            : testimonial.quote
-                                                  .split(" ")
-                                                  .slice(0, testimonialMaxLength)
-                                                  .join(" ") + "..."}
-                                    </blockquote>
-                                    {#if testimonial.quote.split(" ").length > testimonialMaxLength}
-                                        <button
-                                            class="expand-button"
-                                            on:click={() =>
-                                                toggleTestimonial(i)}
-                                        >
-                                            {expandedTestimonials[i]
-                                                ? "Read Less"
-                                                : "Read More"}
-                                            <svelte:component
-                                                this={expandedTestimonials[i]
-                                                    ? ChevronUp
-                                                    : ChevronDown}
-                                                size={16}
-                                            />
-                                        </button>
-                                    {/if}
-                                    <p class="author">
-                                        {testimonial.name} - {testimonial.position},
-                                        {testimonial.airline}
-                                    </p>
-                                </div>
-                            </div>
+            <swiper-container>
+                {#each testimonials as testimonial, i}
+                    <swiper-slide>
+                        <div
+                            class="testimonial-content"
+                            class:expanded={expandedTestimonials[i]}
+                        >
+                            <blockquote>
+                                {@html expandedTestimonials[i]
+                                    ? testimonial.quote
+                                    : `${testimonial.quote.split(" ").slice(0, testimonialMaxLength).join(" ")}...`}
+                            </blockquote>
+                            {#if testimonial.quote.split(" ").length > testimonialMaxLength}
+                                <button
+                                    class="expand-button"
+                                    on:click={() => toggleTestimonial(i)}
+                                >
+                                    {expandedTestimonials[i]
+                                        ? "Read Less"
+                                        : "Read More"}
+                                    <svelte:component
+                                        this={expandedTestimonials[i]
+                                            ? ChevronUp
+                                            : ChevronDown}
+                                        size={16}
+                                    />
+                                </button>
+                            {/if}
+                            <p class="author">
+                                {testimonial.name} - {testimonial.position}, {testimonial.airline}
+                            </p>
                         </div>
-                    {/each}
-                </div>
-                <button class="nav-button prev" on:click={previousTestimonial}>
-                    <ChevronLeft />
-                </button>
-                <button class="nav-button next" on:click={nextTestimonial}>
-                    <ChevronRight />
-                </button>
-            </div>
+                    </swiper-slide>
+                {/each}
+            </swiper-container>
         </div>
 
+        <div class="card linkedin-card">
+            {#each ["https://www.linkedin.com/embed/feed/update/urn:li:share:7238608563433082880", "https://www.linkedin.com/embed/feed/update/urn:li:share:7222962450583687168", "https://www.linkedin.com/embed/feed/update/urn:li:share:7224864937318199296"].slice(0, visibleLinkedInPosts) as src, index}
+                <iframe
+                    {src}
+                    scrolling="no"
+                    class="linkedin-embed"
+                    frameborder="0"
+                    allowfullscreen=""
+                    title="Embedded post {index + 1}"
+                ></iframe>
+            {/each}
+        </div>
     </main>
+    <!-- <span id="copyright">PILOT INTERVIEW PREPARATION &copy 2024</span> -->
 </div>
 
 <style>
+    :global(swiper-container) {
+        width: 100%;
+        height: auto;
+        padding-bottom: 40px;
+    }
+
+    :global(swiper-slide) {
+        height: auto;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        padding: 2rem 1rem;
+    }
+
+    .testimonial-content {
+        width: 100%;
+        max-width: 90%;
+        text-align: left;
+        background: rgba(0, 0, 64, 0.6);
+        padding: 1.5rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    blockquote {
+        font-style: italic;
+        margin-bottom: 1rem;
+        line-height: 1.8rem;
+        white-space: pre-line;
+        font-size: 1rem;
+    }
+
+    #copyright {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        color: #b4b4b4;
+        text-align: center;
+        padding: 0.5rem;
+    }
+    .author {
+        font-weight: bold;
+        color: #ffd700;
+        text-align: right;
+        margin-top: 1rem;
+        font-size: 0.9rem;
+    }
+
+    .expand-button {
+        background: none;
+        border: none;
+        color: #ffd700;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        font-weight: bold;
+        padding: 0.5rem 0;
+        margin-top: 1rem;
+        font-size: 0.9rem;
+    }
+    .services-card {
+        padding: 2rem;
+    }
+
+    h2 {
+        color: #ffd700;
+        text-align: center;
+        margin-bottom: 2rem;
+        font-size: 2rem;
+    }
+
+    .services-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 1.5rem;
+    }
+
+    .service-item {
+        background: rgba(0, 0, 64, 0.4);
+        border-radius: 8px;
+        padding: 1.5rem;
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .service-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .service-icon {
+        background: rgba(255, 215, 0, 0.1);
+        width: 64px;
+        height: 64px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 auto 1rem;
+    }
+
+    .service-icon :global(svg) {
+        color: #ffd700;
+    }
+
+    h3 {
+        color: #ffd700;
+        margin-bottom: 0.5rem;
+        font-size: 1.2rem;
+    }
+
+    p {
+        color: #e4f6fb;
+        font-size: 0.9rem;
+        line-height: 1.4;
+    }
     .container {
         position: relative;
         min-height: 100vh;
@@ -208,8 +440,7 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background: #000020cc;
-        backdrop-filter: blur(5px);
+        background: #00002088;
         z-index: -1;
     }
 
@@ -222,12 +453,22 @@
     }
 
     .card {
-        background: #00004099;
+        background-image: linear-gradient(
+            120deg,
+            rgba(0, 0, 64, 0.478),
+            #402d006a
+        );
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
         border: 1px solid #64c8ff4d;
         border-radius: 8px;
         padding: 2rem;
         margin-bottom: 2rem;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        transition: box-shadow 0.3s ease;
+    }
+    .card:hover {
+        box-shadow: 0 10px 20px rgba(0, 0, 64, 0.2);
     }
 
     h1 {
@@ -255,160 +496,46 @@
         font-size: 1.8rem;
     }
 
-    p {
-        color: #add8e6;
+    p,
+    li {
+        color: #e4f6fb;
         line-height: 1.6;
     }
 
-    .features {
+    .features-card {
+        text-align: center;
+        background-position: center;
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
         gap: 1rem;
     }
 
-    .feature-card {
-        text-align: center;
+    .services-card {
+        padding: 2rem 6rem;
     }
 
-    .icon {
-        width: 48px;
-        height: 48px;
-        margin: 0 auto 1rem;
-        color: #ffd700;
-    }
-
-    .services-list {
-        columns: 2;
-        list-style-type: none;
-        padding: 0;
-    }
-
-    .services-list li::before {
-        content: "•";
-        color: #ffd700;
-        display: inline-block;
-        width: 1em;
-        margin-left: -1em;
-    }
-
-    .testimonials {
-        position: relative;
-        overflow: hidden;
-        height: 400px; /* Set a fixed height for the testimonials container */
-    }
-
-    .testimonial-slider {
-        display: flex;
-        transition: transform 0.3s ease;
-        height: 100%; /* Make the slider take full height of its container */
-    }
-
-    .testimonial {
-        flex: 0 0 100%;
-        display: flex;
+    .linkedin-card {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 1rem;
         justify-content: center;
-        align-items: center; /* Center vertically */
-        height: 100%; /* Take full height of the slider */
     }
 
-    .testimonial-content {
-        max-width: 80%;
-        text-align: left;
-        overflow: hidden;
-        display: flex;
-        flex-direction: column;
-        justify-content: center; /* Center content vertically */
-        height: 100%; /* Take full height of the testimonial */
-    }
-
-    .testimonial-inner {
-        overflow-y: auto; /* Allow scrolling for expanded content */
-        max-height: 100%; /* Take full height of the content area */
-        padding-right: 15px; /* Add some padding for the scrollbar */
-    }
-
-    .testimonial-content.expanded .testimonial-inner {
-        max-height: none; /* Remove max-height when expanded */
-    }
-
-    blockquote {
-        font-style: italic;
-        margin-bottom: 1rem;
-        line-height: 1.8rem;
-        white-space: pre-line;
-    }
-
-    blockquote :global(strong) {
-        color: #ffd700;
-        font-weight: bold;
-    }
-
-    .author {
-        font-weight: bold;
-        color: #ffd700;
-        text-align: right;
-        margin-top: 1rem;
-    }
-
-    .expand-button {
-        background: none;
+    .linkedin-embed {
+        width: 100%;
+        height: 400px;
         border: none;
-        color: #ffd700;
-        cursor: pointer;
-        display: flex;
-        align-items: center;
-        font-weight: bold;
-        padding: 0.5rem 0;
-        margin-top: auto; /* Push the button to the bottom */
     }
 
-    .expand-button :global(svg) {
-        margin-left: 0.5rem;
-    }
-
-    /* Responsive design for testimonials */
-    @media (max-width: 768px) {
-        .testimonials {
-            height: 300px; /* Smaller height for mobile */
-        }
-    }
-
-    @media (min-width: 769px) and (max-width: 1024px) {
-        .testimonials {
-            height: 350px; /* Medium height for tablets */
-        }
-    }
-
-    @media (min-width: 1025px) {
-        .testimonials {
-            height: 400px; /* Larger height for desktops */
-        }
-    }
-
-    .nav-button {
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        background: rgba(0, 0, 64, 0.6);
-        border: none;
-        border-radius: 50%;
-        padding: 0.5rem;
-        color: #ffd700;
-        cursor: pointer;
-    }
-
-    .nav-button.prev {
-        left: 0;
-    }
-    .nav-button.next {
-        right: 0;
-    }
 
     .cta-card {
         display: flex;
         justify-content: space-between;
         align-items: center;
         flex-wrap: wrap;
+        background-size: 30px 30px;
+        background-position: center;
+        background-image: linear-gradient(60deg, #0000407a, #402d006a);
     }
 
     .cta-buttons {
@@ -444,9 +571,6 @@
     }
 
     @media (max-width: 768px) {
-        .features {
-            gap: 0rem;
-        }
         .testimonial-content {
             font-size: 0.9rem;
             line-height: 1.3rem;
@@ -455,21 +579,79 @@
             text-align: center;
         }
 
-        .services-list {
-            columns: 1;
-        }
         .card {
-            padding: 1.8rem;
+            padding: 1rem;
+            margin-bottom: 1rem;
         }
 
         .cta-card {
             flex-direction: column;
             text-align: center;
         }
+        .features-card {
+            grid-template-columns: 1fr;
+            gap: 0rem;
+        }
+        .feature-card {
+            padding: 2rem 1.5rem !important;
+        }
 
         .cta-buttons {
             margin-top: 1rem;
             justify-content: center;
+        }
+        :global(swiper-slide) {
+            padding: 1rem 0.5rem;
+        }
+        .services-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .service-item {
+            padding: 1rem;
+        }
+        .linkedin-card {
+            grid-template-columns: 1fr;
+        }
+
+        .testimonial-content {
+            max-width: 95%;
+            padding: 1rem;
+        }
+
+        blockquote {
+            font-size: 0.9rem;
+            line-height: 1.5rem;
+        }
+
+        .author,
+        .expand-button {
+            font-size: 0.8rem;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+        }
+
+        h3 {
+            font-size: 1rem;
+        }
+
+        p {
+            font-size: 0.8rem;
+        }
+    }
+
+    @media (min-width: 769px) and (max-width: 1024px) {
+        .features-card {
+            grid-template-columns: 1fr;
+            gap: 0rem;
+        }
+        .card {
+            margin-bottom: 1rem;
+        }
+        .linkedin-card {
+            grid-template-columns: repeat(2, 1fr);
         }
     }
 </style>
