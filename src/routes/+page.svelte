@@ -107,21 +107,6 @@
         }
     }
 
-    const onProgress = (e) => {
-        const [swiperInstance, progress] = e.detail;
-        console.log(progress);
-    };
-
-    const onSlideChange = (e) => {
-        console.log("slide changed");
-    };
-
-    function updateSwiper() {
-        if (swiperEl && swiperEl.swiper) {
-            swiperEl.swiper.update();
-        }
-    }
-
     onMount(() => {
         swiperEl = document.querySelector("swiper-container");
         Object.assign(swiperEl, {
@@ -175,7 +160,7 @@
         loop
         muted
         class="background-video"
-        src="https://videos.pexels.com/video-files/3678380/3678380-hd_1920_1080_30fps.mp4"
+        src="./landing_video_optimized.webm"
     />
     <div class="overlay"></div>
     <main class="content">
@@ -328,16 +313,6 @@
         line-height: 1.8rem;
         white-space: pre-line;
         font-size: 1rem;
-    }
-
-    #copyright {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        color: #b4b4b4;
-        text-align: center;
-        padding: 0.5rem;
     }
     .author {
         font-weight: bold;
@@ -496,8 +471,7 @@
         font-size: 1.8rem;
     }
 
-    p,
-    li {
+    p {
         color: #e4f6fb;
         line-height: 1.6;
     }
@@ -552,7 +526,7 @@
         border-radius: 4px;
         font-weight: bold;
         cursor: pointer;
-        transition: background-color 0.3s ease;
+        transition: background-color 0.3s ease, transform 0.3s ease;
     }
 
     .button.primary {
@@ -568,6 +542,9 @@
 
     .button :global(svg) {
         margin-right: 0.5rem;
+    }
+    .button:hover {
+        transform: scale(104%);
     }
 
     @media (max-width: 768px) {
