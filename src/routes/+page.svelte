@@ -280,7 +280,6 @@
             {/each}
         </div>
     </main>
-    <!-- <span id="copyright">PILOT INTERVIEW PREPARATION &copy 2024</span> -->
 </div>
 
 <style>
@@ -433,17 +432,23 @@
             rgba(0, 0, 64, 0.478),
             #402d006a
         );
-        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
-        border: 1px solid #64c8ff4d;
-        border-radius: 8px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        border: 1px solid var(--card-border);
+        border-radius: 16px;
         padding: 2rem;
         margin-bottom: 2rem;
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-        transition: box-shadow 0.3s ease;
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
     }
+
+
     .card:hover {
-        box-shadow: 0 10px 20px rgba(0, 0, 64, 0.2);
+        transform: translateY(-5px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        border-color: rgba(255, 215, 0, 0.3);
     }
 
     h1 {
@@ -510,6 +515,25 @@
         background-size: 30px 30px;
         background-position: center;
         background-image: linear-gradient(60deg, #0000407a, #402d006a);
+    }
+    .cta-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+            90deg,
+            transparent,
+            rgba(255, 255, 255, 0.1),
+            transparent
+        );
+        transition: 0.5s;
+    }
+
+    .cta-card:hover::before {
+        left: 100%;
     }
 
     .cta-buttons {
