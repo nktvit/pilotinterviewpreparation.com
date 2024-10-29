@@ -433,7 +433,7 @@
             #402d006a
         );
         box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-        border: 1px solid var(--card-border);
+        border: 1px solid transparent;
         border-radius: 16px;
         padding: 2rem;
         margin-bottom: 2rem;
@@ -443,7 +443,6 @@
         position: relative;
         overflow: hidden;
     }
-
 
     .card:hover {
         transform: translateY(-5px);
@@ -545,30 +544,66 @@
     .button {
         display: flex;
         align-items: center;
-        padding: 0.5rem 1rem;
+        padding: 0.75rem 1.5rem;
         border: none;
-        border-radius: 4px;
-        font-weight: bold;
+        border-radius: 8px;
+        font-weight: 600;
         cursor: pointer;
-        transition: background-color 0.3s ease, transform 0.3s ease;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        position: relative;
+        overflow: hidden;
     }
 
     .button.primary {
         background-color: #ffd700;
         color: #000040;
+        box-shadow: 0 4px 15px rgba(255, 215, 0, 0.2);
     }
 
     .button.secondary {
         background-color: transparent;
-        border: 1px solid #ffd700;
+        border: 2px solid #ffd700;
         color: #ffd700;
+        position: relative;
+        z-index: 1;
+    }
+
+    .button.secondary::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 0;
+        height: 100%;
+        background: #ffd700;
+        transition: 0.3s ease;
+        z-index: -1;
+    }
+
+    .button.secondary:hover::before {
+        width: 100%;
+    }
+
+    .button.secondary:hover {
+        color: #000040;
+    }
+
+    .button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .button:active {
+        transform: translateY(0);
     }
 
     .button :global(svg) {
-        margin-right: 0.5rem;
+        margin-right: 0.75rem;
+        transition: transform 0.3s ease;
     }
-    .button:hover {
-        transform: scale(104%);
+
+    .button:hover :global(svg) {
+        transform: scale(1.1);
     }
 
     @media (max-width: 768px) {
