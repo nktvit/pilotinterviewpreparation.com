@@ -228,7 +228,7 @@
                 class="md:w-1/3 h-[200px] sm:h-[300px] md:h-auto border border-transparent hover:border-yellow-400/30 rounded-2xl transition-all duration-300 relative overflow-hidden"
             >
                 <div
-                    class="absolute inset-0 bg-[url(./profile.JPG)] bg-cover bg-center transform hover:scale-105 transition-transform duration-500"
+                    class="absolute inset-0 bg-[url(./profile.jpg)] bg-cover bg-center transform hover:scale-105 transition-transform duration-500"
                     style="background-position: center 20%;"
                 >
                     <div
