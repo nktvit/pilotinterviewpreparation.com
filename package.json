@@ -2,6 +2,15 @@
   "name": "gp-svelte",
   "version": "0.0.1",
   "private": true,
+  "files": [
+    "dist"
+  ],
+  "svelte": "dist/index.js",
+  "exports": {
+    ".": {
+      "svelte": "./dist/index.js"
+    }
+  },
   "scripts": {
     "dev": "vite dev",
     "build": "vite build",
@@ -12,7 +21,10 @@
     "@sveltejs/adapter-static": "^3.0.5",
     "@sveltejs/kit": "^2.0.0",
     "@sveltejs/vite-plugin-svelte": "^3.0.0",
+    "@tailwindcss/typography": "^0.5.14",
+    "autoprefixer": "^10.4.20",
     "svelte": "^4.2.7",
+    "tailwindcss": "^3.4.9",
     "vite": "^5.0.3"
   },
   "type": "module",
