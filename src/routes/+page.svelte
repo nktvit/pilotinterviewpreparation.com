@@ -19,6 +19,10 @@
     import "swiper/css/navigation";
     import "swiper/css/pagination";
 
+    import profile from "$lib/assets/profile.jpg?as=run";
+    import { base } from '$app/paths';
+    import Img from '@zerodevx/svelte-img'
+
     register();
 
     $: outerWidth = 0;
@@ -139,7 +143,7 @@
         loop
         muted
         class="fixed top-0 left-0 w-full h-full object-cover -z-20"
-        src="/landing_video_optimized.webm"
+        src="./landing_video_optimized.webm"
     />
     <div class="fixed top-0 left-0 w-full h-full bg-[#00000575] -z-10" />
 
@@ -224,16 +228,16 @@
             </div>
 
             <!-- Profile Image Card -->
-            <div
-                class="md:w-1/3 h-[200px] sm:h-[300px] md:h-auto border border-transparent hover:border-yellow-400/30 rounded-2xl transition-all duration-300 relative overflow-hidden"
-            >
-                <div
-                    class="absolute inset-0 bg-[url(/profile.jpg)] bg-cover bg-center transform hover:scale-105 transition-transform duration-500"
-                    style="background-position: center 20%;"
-                >
-                    <div
-                        class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300"
-                    ></div>
+            <div class="md:w-1/3 h-[200px] sm:h-[300px] md:h-auto border border-transparent hover:border-yellow-400/30 rounded-2xl transition-all duration-300 relative overflow-hidden">
+                <div class="absolute inset-0 transform hover:scale-105 transition-transform duration-500">
+                    <Img 
+                        src={profile}
+                        alt="Profile Image"
+                        class="w-full h-full object-cover"
+                        loading="eager"
+                        style="object-position: center 20%;"
+                    />
+                    <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
                 </div>
             </div>
         </div>
