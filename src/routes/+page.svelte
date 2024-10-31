@@ -139,7 +139,7 @@
         loop
         muted
         class="fixed top-0 left-0 w-full h-full object-cover -z-20"
-        src="./landing_video_optimized.webm"
+        src="/landing_video_optimized.webm"
     />
     <div class="fixed top-0 left-0 w-full h-full bg-[#00000575] -z-10" />
 
@@ -228,7 +228,7 @@
                 class="md:w-1/3 h-[200px] sm:h-[300px] md:h-auto border border-transparent hover:border-yellow-400/30 rounded-2xl transition-all duration-300 relative overflow-hidden"
             >
                 <div
-                    class="absolute inset-0 bg-[url(./profile.jpg)] bg-cover bg-center transform hover:scale-105 transition-transform duration-500"
+                    class="absolute inset-0 bg-[url(/profile.jpg)] bg-cover bg-center transform hover:scale-105 transition-transform duration-500"
                     style="background-position: center 20%;"
                 >
                     <div
