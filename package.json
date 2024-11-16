@@ -30,6 +30,7 @@
   },
   "type": "module",
   "dependencies": {
+    "@sveltejs/enhanced-img": "^0.4.1",
     "lucide-svelte": "^0.453.0",
     "swiper": "^11.1.14"
   }

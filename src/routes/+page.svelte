@@ -19,10 +19,6 @@
     import "swiper/css/navigation";
     import "swiper/css/pagination";
 
-    import profile from "$lib/assets/profile.jpg?as=run";
-    import { base } from '$app/paths';
-    import Img from '@zerodevx/svelte-img'
-
     register();
 
     $: outerWidth = 0;
@@ -93,21 +89,21 @@
 
     const images = [
         {
-            src: "./img1.jpg",
-            alt: "Profile Image",
+            src: "/img1.jpg", // assuming images are in static/img1.jpg
+            alt: "Profile Image 1",
         },
         {
-            src: "./img2.jpg",
-            alt: "Profile Image",
+            src: "/img2.jpg",
+            alt: "Profile Image 2",
         },
         {
-            src: "./img3.jpg",
-            alt: "Profile Image",
+            src: "/img3.jpg",
+            alt: "Profile Image 3",
         },
     ];
 
     onMount(() => {
-        swiperEl = document.querySelector("swiper-container");
+        const swiperEl = document.querySelector("swiper-container");
         Object.assign(swiperEl, {
             slidesPerView: 1,
             spaceBetween: 30,
@@ -228,16 +224,22 @@
             </div>
 
             <!-- Profile Image Card -->
-            <div class="md:w-1/3 h-[200px] sm:h-[300px] md:h-auto border border-transparent hover:border-yellow-400/30 rounded-2xl transition-all duration-300 relative overflow-hidden">
-                <div class="absolute inset-0 transform hover:scale-105 transition-transform duration-500">
-                    <Img 
-                        src={profile}
+            <div
+                class="md:w-1/3 h-[200px] sm:h-[300px] md:h-auto border border-transparent hover:border-yellow-400/30 rounded-2xl transition-all duration-300 relative overflow-hidden"
+            >
+                <div
+                    class="absolute inset-0 transform hover:scale-105 transition-transform duration-500"
+                >
+                    <img
+                        src="/profile.jpg"
                         alt="Profile Image"
                         class="w-full h-full object-cover"
                         loading="eager"
                         style="object-position: center 20%;"
                     />
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
+                    <div
+                        class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300"
+                    ></div>
                 </div>
             </div>
         </div>
@@ -325,16 +327,36 @@
             </swiper-container>
         </div>
 
-       
+        <!-- Images Section -->
+        <div class=" rounded-2xl mb-4 md:mb-8 backdrop-blur-lg">
+            <swiper-container class="w-full">
+                {#each images as img, i}
+                    <swiper-slide
+                        class="flex justify-center items-start h-[600px] select-none"
+                    >
+                        <div
+                            class="w-full h-full relative overflow-hidden rounded-xl"
+                        >
+                            <img
+                                src={img.src}
+                                alt={img.alt}
+                                class="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+                                loading="lazy"
+                            />
+                        </div>
+                    </swiper-slide>
+                {/each}
+            </swiper-container>
+        </div>
     </main>
-        <!-- Footer -->
-        <footer class="relative z-10 w-full mt-auto">
-            <div class="max-w-[1200px] mx-auto p-4 text-center">
-                <div class="text-[#e4f6fb] text-sm opacity-75">
-                    © {new Date().getFullYear()} Denis Cassidy. All rights reserved.
-                </div>
+    <!-- Footer -->
+    <footer class="relative z-10 w-full mt-auto">
+        <div class="max-w-[1200px] mx-auto p-4 text-center">
+            <div class="text-[#e4f6fb] text-sm opacity-75">
+                © {new Date().getFullYear()} Denis Cassidy. All rights reserved.
             </div>
-        </footer>
+        </div>
+    </footer>
 </div>
 
 <style>
