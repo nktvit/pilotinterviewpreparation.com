@@ -19,6 +19,8 @@
     import "swiper/css/navigation";
     import "swiper/css/pagination";
 
+    import { base } from "$app/paths";
+
     register();
 
     $: outerWidth = 0;
@@ -89,15 +91,15 @@
 
     const images = [
         {
-            src: "/img1.jpg", // assuming images are in static/img1.jpg
+            src: `${base}/img1.jpg`,
             alt: "Profile Image 1",
         },
         {
-            src: "/img2.jpg",
+            src: `${base}/img2.jpg`,
             alt: "Profile Image 2",
         },
         {
-            src: "/img3.jpg",
+            src: `${base}/img3.jpg`,
             alt: "Profile Image 3",
         },
     ];
