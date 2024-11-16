@@ -233,7 +233,7 @@
                     class="absolute inset-0 transform hover:scale-105 transition-transform duration-500"
                 >
                     <img
-                        src="/profile.jpg"
+                        src={`${base}/profile.jpg`}
                         alt="Profile Image"
                         class="w-full h-full object-cover"
                         loading="eager"
