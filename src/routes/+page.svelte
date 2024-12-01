@@ -147,46 +147,42 @@
 
     <main class="relative z-10 max-w-[1200px] mx-auto p-4 md:p-8">
         <!-- CTA Card -->
-        <div
-            id="cta-card"
-            class="relative overflow-hidden bg-gradient-to-br from-[#1010555f] to-[#402d0075] rounded-2xl p-6 mb-4 md:mb-8 backdrop-blur-lg border border-transparent hover:border-yellow-400/30 transition-all duration-300"
-        >
-            <div class="flex-1 pb-2 md:pr-4">
-                <h2 class="text-yellow-400 text-2xl font-bold mb-2">
-                    LAND YOUR DREAM JOB WITH YOUR DESIRED AIRLINE!
-                </h2>
-                <p class="text-[#e4f6fb] text-sm">
-                    Contact Denis Cassidy for an all inclusive price and arrange
-                    your pilot interview preparation session.
-                </p>
-            </div>
-            <div class="flex gap-3 flex-wrap">
-                <a href="tel:+353 868 167 242">
-                    <button
-                        class="flex items-center px-4 py-2 bg-yellow-400 text-[#000040] rounded-lg font-semibold transition-all duration-300 hover:-translate-y-1 hover:shadow-lg text-sm"
-                    >
-                        <PhoneCall class="mr-2 h-4 w-4" />
-                        +353 868 167 242
-                    </button>
-                </a>
-                <a href="https://wa.me/353868167242">
-                    <button
-                        class="flex items-center px-4 py-2 bg-[#25d365] text-white rounded-lg font-semibold transition-all duration-300 hover:-translate-y-1 hover:shadow-lg text-sm"
-                    >
-                        <MessageSquareMore class="mr-2 h-4 w-4" />
-                        Chat on WhatsApp
-                    </button>
-                </a>
-                <a href="mailto:dencas@hotmail.com">
-                    <button
-                        class="flex items-center px-4 py-2 text-white bg-[#32329a] rounded-lg font-semibold transition-all duration-300 hover:-translate-y-1 hover:shadow-lg text-sm"
-                    >
-                        <Mail class="mr-2 h-4 w-4" />
-                        dencas@hotmail.com
-                    </button>
-                </a>
-            </div>
-        </div>
+        <div id="cta-card" 
+     class="relative overflow-hidden bg-gradient-to-br from-[#080822] to-[#1a1a40] rounded-3xl p-8 mb-6 backdrop-blur-xl border border-white/5 hover:border-yellow-400/40 transition-all duration-500 hover:shadow-2xl hover:shadow-yellow-400/10 group w-full">
+    <div class="absolute inset-0 bg-gradient-to-br from-yellow-400/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+    
+    <div class="relative w-full">
+        <h2 class="text-yellow-400 text-4xl md:text-5xl xl:text-6xl font-bold mb-4 tracking-tight">
+            LAND YOUR DREAM<br class="hidden md:block"/> AIRLINE JOB!
+        </h2>
+        <p class="text-[#e4f6fb] text-lg md:text-xl xl:text-2xl font-light max-w-2xl">
+            Professional pilot interview preparation tailored to your needs.
+        </p>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full">
+        <a href="tel:+353 868 167 242" class="w-full">
+            <button class="w-full h-full flex items-center justify-center px-6 py-4 bg-yellow-400 hover:bg-yellow-300 text-[#000040] rounded-xl font-semibold transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-yellow-400/20 text-base md:text-lg group">
+                <PhoneCall class="mr-3 h-5 w-5 group-hover:scale-110 transition-transform duration-300" />
+                +353 868 167 242
+            </button>
+        </a>
+        
+        <a href="https://wa.me/353868167242" class="w-full">
+            <button class="w-full h-full flex items-center justify-center px-6 py-4 bg-[#25d365] hover:bg-[#28e06b] text-white rounded-xl font-semibold transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-[#25d365]/20 text-base md:text-lg group">
+                <MessageSquareMore class="mr-3 h-5 w-5 group-hover:scale-110 transition-transform duration-300" />
+                Chat on WhatsApp
+            </button>
+        </a>
+        
+        <a href="mailto:dencas@hotmail.com" class="w-full">
+            <button class="w-full h-full flex items-center justify-center px-6 py-4 bg-[#4040cc] hover:bg-[#5050ee] text-white rounded-xl font-semibold transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-[#4040cc]/20 text-base md:text-lg group">
+                <Mail class="mr-3 h-5 w-5 group-hover:scale-110 transition-transform duration-300" />
+                dencas@hotmail.com
+            </button>
+        </a>
+    </div>
+</div>
 
         <div class="flex flex-col lg:flex-row gap-4 mb-4 md:mb-8 min-h-[400px]">
             <!-- Main Content Card -->
@@ -330,7 +326,7 @@
         </div>
 
         <!-- Images Section -->
-        <div class=" rounded-2xl mb-4 md:mb-8 backdrop-blur-lg">
+        <!-- <div class=" rounded-2xl mb-4 md:mb-8 backdrop-blur-lg">
             <swiper-container class="w-full">
                 {#each images as img, i}
                     <swiper-slide
@@ -349,7 +345,7 @@
                     </swiper-slide>
                 {/each}
             </swiper-container>
-        </div>
+        </div> -->
     </main>
     <!-- Footer -->
     <footer class="relative z-10 w-full mt-auto">
