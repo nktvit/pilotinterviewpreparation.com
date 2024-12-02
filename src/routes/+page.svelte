@@ -1,2 +1,1 @@
-<h1>Update check</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<span>Test page</span>
