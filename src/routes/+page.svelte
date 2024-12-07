@@ -3,10 +3,11 @@
     import yellowHelicopter from '$lib/assets/yellow-helicopter.jpeg?as=run'
     import Img from '@zerodevx/svelte-img'
     import * as Card from "$lib/components/ui/card/index.js";
-    
+
     // Carousel
     import * as Carousel from "$lib/components/ui/carousel/index.js";
     import Autoplay from "embla-carousel-autoplay";
+    import {WheelGesturesPlugin} from 'embla-carousel-wheel-gestures'
 
     // Carousel slides
     const slides = [
@@ -36,6 +37,31 @@
             caption: "Caption 5"
         }
     ]
+
+    // Carousel states
+    let api = $state();
+
+    const count = $derived(api ? api.scrollSnapList().length : 0);
+    let current = $state(0);
+
+    $effect(() => {
+        if (api) {
+            current = api.selectedScrollSnap() + 1;
+            api.on("select", () => {
+                current = api.selectedScrollSnap() + 1;
+            });
+        }
+    });
+
+    function gotoSlide(i) {
+        return () => {
+            if (api) {
+                api.scrollTo(i - 1);
+                api.plugins().autoplay.stop()
+            }
+        };
+    }
+
 </script>
 
 <div class=" text-center bg-[rgb(1,23,55)]">
@@ -98,7 +124,7 @@
                 <h3 class="text-white">Trainings That<br/>Get Results</h3>
                 <div class="backdrop-blur">
                     <div class="w-[70%] md:w-1/2 lg:w-1/3 mx-auto pt-4">
-                        <p class="text-xl text-slate-300 mb-6">From recent graduates to <strong>command
+                        <p class="text-xl text-primary-foreground mb-6">From recent graduates to <strong>command
                             upgrades</strong>, we
                             prepare pilots for their <strong>target airlines</strong>. Our proven approach combines
                             current
@@ -112,16 +138,21 @@
         <section class="container mx-auto pt-16 pb-8">
             <h3 class="text-white mt-8">About Us</h3>
             <Carousel.Root
+                    setApi={(emblaApi) => (api = emblaApi)}
                     opts={{
-    align: "start",
-    loop: true,
-    duration: 40
-  }}
+                        align: "start",
+                        loop: true,
+                        duration: 30,
+                        containScroll: "keepSnaps",
+                      }}
                     plugins={[
-    Autoplay({
-      delay: 10000,
-    }),
-  ]}
+                        Autoplay({
+                          delay: 10000,
+                        }),
+                        WheelGesturesPlugin({
+                            forceWheelAxis: 'x',
+                        })
+                      ]}
                     class="w-full max-w-sm"
             >
                 <Carousel.Content>
@@ -136,10 +167,20 @@
                                     </Card.Content>
                                 </Card.Root>
                             </div>
+                            <span class="block text-left ml-4 mt-1 text-primary-foreground">Examination</span>
+
                         </Carousel.Item>
                     {/each}
                 </Carousel.Content>
             </Carousel.Root>
+            <div class="text-muted-foreground py-2 text-center text-sm">
+                Slide {current} of {count}
+            </div>
+            <div class="flex flex-row space-x-2">
+                {#each slides as slide, i (i)}
+                    <button class={`text-white p-4 ${i+1 === current ? "bg-white/80" : ""}`} onclick={gotoSlide(i+1)}>{slide.title}</button>
+                {/each}
+            </div>
         </section>
     </main>
 </div>
