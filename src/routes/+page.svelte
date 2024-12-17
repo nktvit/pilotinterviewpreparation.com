@@ -1,443 +1,669 @@
 <script>
-    import { onMount } from "svelte";
-    import { register } from "swiper/element/bundle";
-    import {
-        PhoneCall,
-        Mail,
-        Calendar,
-        Users,
-        Award,
-        Lightbulb,
-        ChartArea,
-        Brain,
-        Plane,
-        MessageSquare,
-        MessageSquareMore,
-        UserCheck,
-    } from "lucide-svelte";
-    import "swiper/css";
-    import "swiper/css/navigation";
-    import "swiper/css/pagination";
+    // Images
+    import yellowHelicopter from '$lib/assets/yellow-helicopter.jpeg?as=run'
+    import examinationCenter from '$lib/assets/examination-center.png?as=run'
+    import cvWriting from '$lib/assets/cv-writing.jpg?as=run'
+    import planeIrish from '$lib/assets/plane-irish.jpg?as=run'
+    import groupTraining from '$lib/assets/group-training.png?as=run'
+    import professionalDevelopment from '$lib/assets/professional-development.jpg?as=run'
+    import planeDenis from '$lib/assets/plane-denis.jpg?as=run'
+    import planeDenis2 from '$lib/assets/plane-denis2.jpg?as=run'
 
-    import { base } from "$app/paths";
+    // Logos
+    import aerLingus from '$lib/assets/logos/aer-lingus.png?as=run:0'
+    import britishAirways from '$lib/assets/logos/british-airways.png?as=run:0'
+    import cathayPacific from '$lib/assets/logos/cathay-pacific.png?as=run:0'
+    import dhl from '$lib/assets/logos/dhl.png?as=run:0'
+    import easyJet from '$lib/assets/logos/easy-jet.png?as=run:0'
+    import jet2 from '$lib/assets/logos/jet2.png?as=run:0'
+    import ryanair from '$lib/assets/logos/ryanair.png?as=run:0'
+    import virginAtlantic from '$lib/assets/logos/virgin-atlantic.png?as=run:0'
 
-    register();
+    import Img, {FxParallax as ImgParallax} from '@zerodevx/svelte-img'
 
-    $: outerWidth = 0;
-    $: innerWidth = 0;
-    $: outerHeight = 0;
-    $: innerHeight = 0;
-    let swiperEl;
+    // Components
+    import * as Card from "$lib/components/ui/card/index.js";
+    import {Separator} from "$lib/components/ui/separator/index.js";
+    import {ScrollArea} from "$lib/components/ui/scroll-area/index.js";
+    import * as Accordion from "$lib/components/ui/accordion/index.js";
+    import * as AlertDialog from "$lib/components/ui/alert-dialog/index.js";
+    import {Plane, Phone, Mail} from "lucide-svelte";
+    import Logo from "$lib/components/logo.svelte";
+    import CtaButton from "$lib/components/cta-button.svelte";
 
-    const testimonials = [
+
+    // Carousel
+    import * as Carousel from "$lib/components/ui/carousel/index.js";
+    import Autoplay from "embla-carousel-autoplay";
+    import {WheelGesturesPlugin} from 'embla-carousel-wheel-gestures'
+
+    // Data
+    const slides = [
         {
-            name: "Manuel Simone",
-            position: "First Officer",
-            airline: "ITA Airways SuPra. - Italy",
-            quote: "I recently had a session with Denis Cassidy about preparation for my interview with one of the <strong>best airlines worldwide, Virgin Atlantic</strong>.<br><br>The session with him not only <strong>changes your mindset</strong> to gain the position you are applying for, but gives a lot of <strong>advice, tips, points of view and suggestions</strong> that definitely will make you <strong>perform in a unique way</strong> at your interview.<br><br>All the useful things I learned from him are for me so <strong>crucial</strong> that I will bring with me and apply for most of the <strong>career goals</strong> I will want to achieve in the future.<br><br>To contact him was a <strong>great choice</strong> that was <strong>fundamental for my successful interview</strong>.<br><br>Thank you Denis!",
+            title: "Strategies",
+            content: `
+            <span>Master proven&nbsp;</span><strong>structured interview techniques</strong>
+            <span>&nbsp;that Irish and European airlines use today. Through one-to-one coaching, you'll develop the&nbsp;</span>
+            <strong>competency-based answers</strong>
+            <span>&nbsp;that assessors look for. Our approach combines current airline standards with your personal experience, ensuring you interview with confidence and authenticity.</span>
+            `,
+            caption: "Examination Center",
+            image: examinationCenter
         },
         {
-            name: "Richard O'Brien",
-            position: "First Officer",
-            airline: "AerLingus Regional",
-            quote: "I cannot express how <strong>grateful</strong> I am for the <strong>exceptional interview preparation</strong> I received from Denis Cassidy for my First Officer position. His <strong>experience</strong> gave me a thorough and insightful view of the <strong>aviation industry</strong>. The guidance I received was <strong>tailored</strong> to me and my CV giving me an insight into the skills already present from my experiences. This preparation <strong>boosted my confidence</strong> and helped me <strong>articulate my thoughts</strong> more clearly in the interview. Thanks to the <strong>fantastic prep</strong> I was able to <strong>secure the position</strong> I wanted. I would <strong>highly recommend</strong> Denis Cassidy's services to anyone looking to <strong>excel in their aviation interviews</strong>.",
+            title: "CV Enhancement",
+            content: `
+            <span>Powerful&nbsp;<strong>airline pilot CV</strong>&nbsp;that aligns with recruitment systems and catches attention. Your flying experience will be presented to match exactly what airlines want to see. We'll transform your career highlights into compelling achievements that showcase your true potential as a candidate.</span><p><br></p>
+            `,
+            caption: "Mrs. Jane Doe working on her CV",
+            image: cvWriting
+
         },
         {
-            name: "Justin Butler",
-            position: "First Officer",
-            airline: "Ryanair",
-            quote: "I recently had the <strong>incredible opportunity</strong> to work with Denis Cassidy for my interview preparation with Virgin Atlantic. Through this experience, it became crystal clear that Denis possesses a <strong>wealth of knowledge and expertise</strong> that spans decades and continents in the aviation industry. His <strong>deep understanding of pilot placement</strong>, especially for prestigious airlines like Virgin Atlantic, is both enlightening and motivating.<br><br>Denis's approach to interview preparation is <strong>unparalleled</strong>. He emphasizes the <strong>critical importance of being thoroughly prepared</strong>, making it evident that going into such a process unprepared is a serious disadvantage. The Virgin Atlantic interview, as I learned firsthand from Denis, is <strong>unlike any other in the airline industry</strong>. It requires not just knowledge and skill but a <strong>profound understanding of the company's culture and values</strong>, something that Denis was exceptionally equipped to provide guidance on.<br><br>His mentorship was not just about preparation but about <strong>building confidence, fine-tuning strengths, and addressing weaknesses</strong> with a positive and constructive outlook. Denis's <strong>dedication to aviation</strong> and to the success of his candidates shines brightly, offering not just advice but <strong>genuine support and encouragement</strong>.<br><br>Despite the inherent challenges of the interview process, Denis's guidance was <strong>instrumental in my preparedness and mindset</strong>. His talent for making complex concepts accessible, combined with his sincere commitment to my success, was a source of inspiration and positivity.<br><br>For anyone aspiring to a career in aviation, especially with an eye on Virgin Atlantic, Denis Cassidy's guidance is <strong>invaluable</strong>. His expertise, commitment, and the personalized support he offers are <strong>second to none</strong>. A heartfelt thank you to Denis for not just preparing me for the interview but for highlighting the importance of <strong>comprehensive preparation</strong> in facing the unique challenges posed by Virgin Atlantic. Your impact on my journey has been profound.",
+            title: "Trainings",
+            content: `
+            <span>Walk into your&nbsp;</span><strong>airline assessment day</strong><span>&nbsp;fully prepared and confident. Our realistic&nbsp;</span><strong>group exercise practice</strong><span>&nbsp;mirrors what you'll face at major carriers. From technical questions to team scenarios, you'll be ready to demonstrate your capabilities naturally and effectively.</span>`,
+            caption: "Group Training",
+            image: groupTraining
+
         },
         {
-            name: "Angus Hayes",
-            position: "First Officer",
-            airline: "Virgin Atlantic",
-            quote: "Hi all, just a small review for @Denis Cassidy.<br><br>Interviews for me have been a bit of a <strong>struggle</strong>, but Denis was a <strong>fantastic help</strong> for me. He helped me <strong>gain confidence</strong> for the interview in general and helped me get into the <strong>right mindset</strong> going into the interview.<br><br><strong>Highly recommend</strong> for anyone approaching <strong>final interview</strong> or the <strong>Zenon interview</strong> to give Denis a shout.",
+            title: "Airline-Specific",
+            content: `Gain valuable insights into current&nbsp;<strong>airline selection processes</strong>&nbsp;and requirements. Learn from recently successful&nbsp;<strong>pilot interviews</strong>&nbsp;what works right now. Our continuously updated guidance helps you understand each airline's priorities and culture, maximizing your interview success rate.`,
+            caption: "Irish Air Corps plane",
+            image: planeIrish
+
         },
+        {
+            title: "Professional Development",
+            content: `<span>Master the key&nbsp;</span><strong>airline competencies</strong><span>&nbsp;that define successful candidates. Show deep understanding of modern&nbsp;</span><strong>commercial aviation</strong><span>&nbsp;operations and challenges. We'll help you demonstrate the natural&nbsp;</span><strong>leadership abilities</strong><span>&nbsp;that make you stand out as the ideal pilot for their team.</span>`,
+            caption: "Virgin Atlantic plane",
+            image: professionalDevelopment
+
+        }
+    ]
+    const airlines = [
+        {
+            title: "British Airways",
+            image: britishAirways
+        },
+        {
+            title: "Virgin Atlantic",
+            image: virginAtlantic
+        },
+        {
+            title: "Cathay Pacific",
+            image: cathayPacific
+        },
+        {
+            title: "DHL",
+            image: dhl
+        },
+        {
+            title: "EasyJet",
+            image: easyJet
+        },
+        {
+            title: "Jet2",
+            image: jet2
+        },
+        {
+            title: "Ryanair",
+            image: ryanair
+        },
+        {
+            title: "Aer Lingus",
+            image: aerLingus
+        }
+    ]
+    const faqs = [
+        {
+            question: "How long is the preparation session?",
+            answer: "Each preparation session lasts up to 2 hours, with additional time for follow-up questions. This allows for comprehensive coverage of airline-specific scenarios, competency framework, and personalized feedback on your responses."
+        },
+        {
+            question: "When should I schedule my preparation?",
+            answer: "Ideally, schedule your session 2-3 weeks before your airline interview. This gives you enough time to implement feedback, practice techniques, and refine your responses while keeping the material fresh in your mind."
+        },
+        {
+            question: "Is online preparation effective?",
+            answer: "Yes. Teams sessions have proven highly effective for pilot interview preparation. They allow for dynamic interaction, document sharing, and realistic interview simulation. Our track record shows successful placements at major carriers using this format."
+        },
+        {
+            question: "What airlines do you prepare pilots for?",
+            answer: "We provide preparation for major European and Middle Eastern carriers, including flag carriers, low-cost operators, and regional airlines. Our interview scenarios and competency frameworks are regularly updated through our network of successful candidates."
+        },
+        {
+            question: "Do you help with technical preparation?",
+            answer: "While we focus on interview technique and competency demonstration, we can guide you on presenting technical knowledge effectively. This includes structuring answers about systems knowledge, SOPs, and operational scenarios."
+        },
+        {
+            question: "What experience level do you cater to?",
+            answer: "We support pilots at all career stages: newly qualified pilots seeking their first airline position, experienced pilots transitioning between carriers, and captains preparing for command upgrades."
+        },
+        {
+            question: "How do you stay current with airline requirements?",
+            answer: "Our preparation materials are continuously updated through post-interview feedback from successful candidates. This ensures you receive the most current interview scenarios, assessment techniques, and airline-specific requirements."
+        },
+        {
+            question: "What's included in the preparation package?",
+            answer: "Your package includes a 2-hour personalized session, CV review, competency framework guidance, current airline-specific scenarios, group exercise strategies, and post-session support until your interview date."
+        }
     ];
 
-    const services = [
-        {
-            icon: Lightbulb,
-            title: "Interview Awareness",
-            description: "Greater awareness of interview elements",
-        },
-        {
-            icon: ChartArea,
-            title: "Process Understanding",
-            description: "Understanding of the interview process",
-        },
-        {
-            icon: Brain,
-            title: "Competency Knowledge",
-            description: "Knowledge of competency-based structure",
-        },
-        {
-            icon: Plane,
-            title: "Airline-Specific Prep",
-            description: "Tailored preparation for specific airlines",
-        },
-        {
-            icon: MessageSquare,
-            title: "Feedback Strategies",
-            description: "Feedback and improvement strategies",
-        },
-        {
-            icon: UserCheck,
-            title: "Mock Interviews",
-            description: "Mock interview sessions",
-        },
-    ];
+    //  States
+    let api = $state(null);
+    let count = $state(0);
+    let current = $state(0);
+    let currentContent = $derived(slides[current]?.content ?? '');
 
-    const images = [
-        {
-            src: `${base}/img1.jpg`,
-            alt: "Profile Image 1",
-        },
-        {
-            src: `${base}/img2.jpg`,
-            alt: "Profile Image 2",
-        },
-        {
-            src: `${base}/img3.jpg`,
-            alt: "Profile Image 3",
-        },
-    ];
+    $effect(() => {
+        if (api) {
+            count = api.scrollSnapList().length;
+            current = api.selectedScrollSnap();
 
-    onMount(() => {
-        const swiperEl = document.querySelector("swiper-container");
-        Object.assign(swiperEl, {
-            slidesPerView: 1,
-            spaceBetween: 30,
-            pagination: {
-                clickable: true,
-            },
-            navigation: true,
-            breakpoints: {
-                640: {
-                    slidesPerView: 1,
-                },
-                1024: {
-                    slidesPerView: 1,
-                },
-            },
-        });
-        swiperEl.initialize();
+            api.on("select", () => {
+                current = api.selectedScrollSnap();
+            });
+        }
     });
+
+    function gotoSlide(i) {
+        return () => {
+            if (api) {
+                api.scrollTo(i);
+                api.plugins()?.autoplay?.stop();
+            }
+        };
+    }
+
+    function handleKeydown(i, e) {
+        if (e.key === 'ArrowRight') {
+            gotoSlide((i + 1) % count)();
+        } else if (e.key === 'ArrowLeft') {
+            gotoSlide((i - 1 + count) % count)();
+        }
+    }
+
 </script>
 
-<svelte:window
-    bind:innerWidth
-    bind:outerWidth
-    bind:innerHeight
-    bind:outerHeight
-/>
+<div class=" text-center md:text-left bg-[rgb(1,23,55)]">
+    <header class="container mx-auto flex flex-col min-h-[90vh] h-[90vh] md:max-w-2xl lg:max-w-5xl relative">
+        <!-- Logo with fixed position from top -->
+        <div class="pt-5">
+            <Logo class="text-white fill-white"/>
+        </div>
 
-<div
-    class="relative min-h-screen w-full overflow-x-hidden text-white font-sans"
->
-    <video
-        autoplay
-        loop
-        muted
-        class="fixed top-0 left-0 w-full h-full object-cover -z-20"
-        src="./landing_video_optimized.webm"
-    />
-    <div class="fixed top-0 left-0 w-full h-full bg-[#00000575] -z-10" />
-
-    <main class="relative z-10 max-w-[1200px] mx-auto p-4 md:p-8">
-        <!-- CTA Card -->
-        <div id="cta-card" 
-     class="relative overflow-hidden bg-gradient-to-br from-[#080822] to-[#1a1a40] rounded-3xl p-8 mb-6 backdrop-blur-xl border border-white/5 hover:border-yellow-400/40 transition-all duration-500 hover:shadow-2xl hover:shadow-yellow-400/10 group w-full">
-    <div class="absolute inset-0 bg-gradient-to-br from-yellow-400/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-    
-    <div class="relative w-full">
-        <h2 class="text-yellow-400 text-4xl md:text-5xl xl:text-6xl font-bold mb-4 tracking-tight">
-            LAND YOUR DREAM<br class="hidden md:block"/> AIRLINE JOB!
-        </h2>
-        <p class="text-[#e4f6fb] text-lg md:text-xl xl:text-2xl font-light max-w-2xl">
-            Professional pilot interview preparation tailored to your needs.
-        </p>
-    </div>
-
-    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full">
-        <a href="tel:+353 868 167 242" class="w-full">
-            <button class="w-full h-full flex items-center justify-center px-6 py-4 bg-yellow-400 hover:bg-yellow-300 text-[#000040] rounded-xl font-semibold transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-yellow-400/20 text-base md:text-lg group">
-                <PhoneCall class="mr-3 h-5 w-5 group-hover:scale-110 transition-transform duration-300" />
-                +353 868 167 242
-            </button>
-        </a>
-        
-        <a href="https://wa.me/353868167242" class="w-full">
-            <button class="w-full h-full flex items-center justify-center px-6 py-4 bg-[#25d365] hover:bg-[#28e06b] text-white rounded-xl font-semibold transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-[#25d365]/20 text-base md:text-lg group">
-                <MessageSquareMore class="mr-3 h-5 w-5 group-hover:scale-110 transition-transform duration-300" />
-                Chat on WhatsApp
-            </button>
-        </a>
-        
-        <a href="mailto:dencas@hotmail.com" class="w-full">
-            <button class="w-full h-full flex items-center justify-center px-6 py-4 bg-[#4040cc] hover:bg-[#5050ee] text-white rounded-xl font-semibold transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-[#4040cc]/20 text-base md:text-lg group">
-                <Mail class="mr-3 h-5 w-5 group-hover:scale-110 transition-transform duration-300" />
-                dencas@hotmail.com
-            </button>
-        </a>
-    </div>
-</div>
-
-        <div class="flex flex-col lg:flex-row gap-4 mb-4 md:mb-8 min-h-[400px]">
-            <!-- Main Content Card -->
-            <div
-                class="flex-1 lg:w-2/3 bg-gradient-to-br from-[#1010555f] to-[#402d0075] rounded-2xl p-4 sm:p-6 lg:p-8 backdrop-blur-lg border border-transparent hover:border-yellow-400/30 transition-all duration-300"
-            >
-                <h1
-                    class="text-2xl sm:text-3xl lg:text-4xl font-bold text-yellow-400 mb-4 lg:mb-6 font-roboto leading-tight"
-                >
-                    PILOT INTERVIEW PREPARATION
+        <!-- Main content with fixed heights and spacing -->
+        <div class="flex-1 flex flex-col justify-between mt-16 sm:mt-20 text-white">
+            <!-- Title section with consistent spacing -->
+            <div class="flex-grow-0">
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl leading-tight">
+                    Land your<br/>dream<br/>airline Job
                 </h1>
-                <div
-                    class="text-[#e4f6fb] leading-relaxed text-sm sm:text-base space-y-3 sm:space-y-4"
-                >
-                    <span class="block">
-                        Based in Ireland, Denis Cassidy has over thirty years
-                        experience providing pilot assessment and selection
-                        services to Airlines and ATO's throughout Europe and the
-                        Middle East.
-                    </span>
-                    <span class="block">
-                        Now using Teams to provide personalised pilot interview
-                        preparation sessions that are based on your CV content
-                        and the upcoming specific airline interview.
-                    </span>
-                    <span class="block">
-                        Pilots who have benefited from these preparation
-                        sessions range from the recently graduated to highly
-                        experienced pilots moving from short to long-haul
-                        carriers or going for command upgrades.
-                    </span>
-                    <span class="block">
-                        Post interview debriefs ensure that preparation sessions
-                        are constantly updated.
-                    </span>
-                </div>
             </div>
 
-            <!-- Profile Image Card -->
-            <div
-                class="md:w-1/3 h-[200px] sm:h-[300px] md:h-auto border border-transparent hover:border-yellow-400/30 rounded-2xl transition-all duration-300 relative overflow-hidden"
-            >
-                <div
-                    class="absolute inset-0 transform hover:scale-105 transition-transform duration-500"
-                >
-                    <img
-                        src={`${base}/profile.jpg`}
-                        alt="Profile Image"
-                        class="w-full h-full object-cover"
-                        loading="eager"
-                        style="object-position: center 20%;"
-                    />
-                    <div
-                        class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300"
-                    ></div>
-                </div>
+            <!-- CTA section with fixed bottom spacing -->
+            <div class="flex flex-col mb-8 sm:mb-12">
+                <h2 class="mb-6 text-xl sm:text-2xl leading-relaxed">
+                    Book Your Session with a<br/>Former Airline Assessor
+                </h2>
+                <AlertDialog.Root>
+                    <div class="text-center sm:text-left">
+                        <AlertDialog.Trigger class="ring-0 outline-0 inline-block">
+                            <CtaButton/>
+                        </AlertDialog.Trigger>
+                    </div>
+                    <AlertDialog.Content
+                            class="w-[90vw] sm:max-w-lg md:max-w-xl lg:max-w-2xl bg-[rgb(1,23,55)] text-white">
+                        <AlertDialog.Header>
+                            <AlertDialog.Title class="text-2xl sm:text-3xl roboto-black text-white">
+                                Book Your Interview Preparation
+                            </AlertDialog.Title>
+                            <AlertDialog.Description
+                                    class="mt-4 roboto-regular text-lg leading-relaxed text-primary-foreground">
+                                Contact us by phone to schedule your personalized interview preparation session:
+                            </AlertDialog.Description>
+                        </AlertDialog.Header>
+
+                        <div class="py-6 space-y-6">
+                            <div class="flex flex-col items-center sm:items-start space-y-3">
+                                <div class="text-xl roboto-medium text-white">Book by Phone</div>
+
+                                <a href="tel:+353868167242"
+                                   class="flex items-center space-x-2 text-xl text-[hsl(var(--accent))] hover:text-[hsl(var(--accent))/90] transition-colors roboto-medium"
+                                >
+                                    <Phone class="h-5 w-5"/>
+                                    <span>+353 868 167 242</span>
+                                </a>
+                            </div>
+
+                            <div class="space-y-2">
+                                <div class="text-sm text-[hsl(var(--muted-foreground))] roboto-medium">
+                                    Available times for calls:
+                                </div>
+                                <div class="text-sm text-primary-foreground roboto-regular">
+                                    Monday - Friday: 9:00 AM - 6:00 PM (Irish Time)
+                                </div>
+                            </div>
+
+                            <div class="space-y-3">
+                                <div class="roboto-medium text-white">What to expect:</div>
+                                <ul class="space-y-2 text-sm text-[hsl(var(--muted-foreground))] roboto-regular">
+                                    <li class="flex items-center space-x-2">
+                                        <span class="text-[hsl(var(--accent))]">•</span>
+                                        <span>Brief discussion of your experience and goals</span>
+                                    </li>
+                                    <li class="flex items-center space-x-2">
+                                        <span class="text-[hsl(var(--accent))]">•</span>
+                                        <span>Overview of available session types</span>
+                                    </li>
+                                    <li class="flex items-center space-x-2">
+                                        <span class="text-[hsl(var(--accent))]">•</span>
+                                        <span>Scheduling your preparation session</span>
+                                    </li>
+                                    <li class="flex items-center space-x-2">
+                                        <span class="text-[hsl(var(--accent))]">•</span>
+                                        <span>Payment details and confirmation</span>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <AlertDialog.Footer class="sm:justify-between flex-col sm:flex-row gap-4">
+                            <div class="text-sm text-[hsl(var(--muted-foreground))] roboto-regular">
+                                We look forward to helping you succeed in your airline interview
+                            </div>
+                            <AlertDialog.Cancel
+                                    class="mt-2 sm:mt-0 bg-[hsl(var(--accent))] text-[hsl(var(--accent-foreground))] hover:bg-[hsl(var(--accent))/90] transition-colors roboto-medium">
+                                Close
+                            </AlertDialog.Cancel>
+                        </AlertDialog.Footer>
+                    </AlertDialog.Content>
+                </AlertDialog.Root>
             </div>
         </div>
 
-        <!-- Features Grid -->
-        <div class="flex flex-wrap gap-4 mb-4 md:mb-8">
-            {#each [{ icon: Calendar, title: "Flexible Scheduling", description: "Book your preparation sessions at times that suit your schedule." }, { icon: Users, title: "Experienced Mentors", description: "Learn from industry professionals with years of experience." }, { icon: Award, title: "Proven Success", description: "Our clients have succeeded with major airlines worldwide." }] as { icon: Icon, title, description }}
-                <div
-                    class="w-full md:w-[calc(33.333%-1rem)] flex-grow basis-[300px] bg-gradient-to-br from-[#1010555f] to-[#402d0075] rounded-2xl p-6 backdrop-blur-lg border border-transparent hover:border-yellow-400/30 transition-all duration-300 hover:-translate-y-1"
-                >
-                    <svelte:component
-                        this={Icon}
-                        class="mx-auto text-yellow-400 w-16 h-16 mb-4"
-                    />
-                    <h2 class="text-xl font-medium text-yellow-400 mb-2">
-                        {title}
-                    </h2>
-                    <p class="text-[#e4f6fb] text-sm">
-                        {description}
-                    </p>
+        <!-- Navigation links with fixed bottom position -->
+        <!--        <div class="hidden sm:flex flex-row justify-between pb-8">-->
+        <!--            <a class="px-3 py-2 text-white hover:text-white/80 transition-colors" href="#">Testimonials</a>-->
+        <!--            <a class="px-3 py-2 text-white hover:text-white/80 transition-colors" href="#">Contact</a>-->
+        <!--        </div>-->
+    </header>
+    <main class=" flex flex-col">
+        <section class="relative h-[600px] md:h-[600px] py-12">
+            <Img
+                    class="w-full h-[65%] absolute top-0 left-0 object-cover object-[55%_center]"
+                    src={yellowHelicopter}
+                    alt="A yellow helicopter"
+            />
+            <!--black overlay-->
+            <div class="absolute h-[65%] inset-0 bg-black/35 -z-5"></div>
+            <div class="h-full flex flex-col relative items-center text-center mt-10 justify-between">
+                <h3 class="text-white">Trainings That<br/>Get Results</h3>
+                <div class="backdrop-blur w-full">
+                    <div class="pt-3">
+                        <p class="text-2xl font-bold text-primary-foreground mb-6 mx-auto w-[80%] md:w-[40%] lg:w-[25%]">From recent graduates<br>to <strong>command
+                            upgrades</strong>, we
+                            prepare pilots for their <strong>target airlines</strong>. Our proven approach combines
+                            current
+                            industry knowledge with <strong>personalised guidance</strong>.</p>
+                    </div>
                 </div>
-            {/each}
-        </div>
 
-        <!-- Services Section -->
-        <div
-            class="bg-gradient-to-br from-[#1010555f] to-[#402d0075] rounded-2xl p-4 md:p-8 lg:px-24 mb-4 md:mb-8 backdrop-blur-lg"
-        >
-            <h2 class="text-3xl font-medium text-yellow-400 text-center mb-8">
-                Our Services
-            </h2>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-6">
-                {#each services as service}
-                    <div
-                        class="bg-[#00004066] rounded-xl p-6 text-center transition-all duration-300 hover:-translate-y-2 border border-transparent hover:border-yellow-400/30"
-                    >
-                        <div
-                            class="w-16 h-16 mx-auto mb-4 rounded-full bg-yellow-400/10 flex items-center justify-center border-2 border-yellow-400/20"
-                        >
-                            <svelte:component
-                                this={service.icon}
-                                size={32}
-                                class="text-yellow-400"
+
+            </div>
+        </section>
+        <section class="container mx-auto py-12">
+            <!--desktop only-->
+            <div class="hidden sm:block mt-12 mx-auto w-full max-w-xl lg:max-w-2xl">
+                <Carousel.Root
+                        setApi={(emblaApi) => (api = emblaApi)}
+                        opts={{
+            align: "center",
+            loop: true,
+            duration: 30,
+            containScroll: false,
+        }}
+                        plugins={[
+            Autoplay({
+                delay: 10000,
+            }),
+            WheelGesturesPlugin({
+                forceWheelAxis: 'x',
+            })
+        ]}
+                        class="px-8"
+                >
+                    <Carousel.Content>
+                        {#each slides as slide, i (i)}
+                            <Carousel.Item class="md:flex-[0_0_70%] min-w-0">
+                                <div class="p-1">
+                                    <Img
+                                            class="w-full h-full aspect-square object-cover"
+                                            src={slide.image}
+                                            alt={slide.caption}
+                                    />
+                                </div>
+                                <span class="block text-left ml-4 mt-1 text-primary-foreground">
+                                    {slide.caption}
+                                </span>
+                            </Carousel.Item>
+                        {/each}
+                    </Carousel.Content>
+                </Carousel.Root>
+
+                <div class="hidden text-muted-foreground py-2 text-center text-sm">
+                    Slide {current + 1} of {count}
+                </div>
+
+                <ScrollArea class="whitespace-nowrap" orientation="horizontal">
+                    <div class="flex w-max p-4">
+                        {#each slides as slide, i (i)}
+                            <button
+                                    class={`text-white box-content focus:ring-0 focus:outline-0 border-b border-muted-foreground py-4 px-3 focus: transition-colors
+                        ${i === current ? "border-b-[2.5px] bg-white/10 border-white" : ""}`}
+                                    onclick={gotoSlide(i)}
+                                    onkeydown={(e) => handleKeydown(i, e)}
+                            >
+                                {slide.title}
+                            </button>
+                        {/each}
+                    </div>
+                </ScrollArea>
+
+                <div class="h-[400px] w-[70%] mx-auto mt-6 ">
+                    {#if currentContent}
+                        <p class="text-primary-foreground text-2xl">{@html currentContent}</p>
+                    {/if}
+                </div>
+
+            </div>
+
+            <!--mobile only-->
+            <div class="sm:hidden flex flex-col space-y-12">
+                {#each slides as slide, i (i)}
+                    <div class="md:flex-[0_0_70%] min-w-0">
+                        <div class="p-1">
+                            <Img
+                                    class="w-full h-full aspect-square object-cover"
+                                    src={slide.image}
+                                    alt={slide.caption}
                             />
                         </div>
-                        <h3 class="text-lg font-medium text-yellow-400 mb-2">
-                            {service.title}
-                        </h3>
-                        <p class="text-[#e4f6fb] text-sm">
-                            {service.description}
-                        </p>
+                        <span class="block text-left ml-4 mt-1 text-primary-foreground">
+                                    {slide.caption}
+                                </span>
+                        <div class="p-4">
+                            <h4 class="text-white text-left text-3xl font-medium mt-3 mb-4">{slide.title}</h4>
+                            {#if currentContent}
+                                <p class="text-primary-foreground text-left text-xl">{@html currentContent}</p>
+                            {/if}
+                        </div>
                     </div>
                 {/each}
-            </div>
-        </div>
 
-        <!-- Testimonials Section -->
-        <div
-            class="bg-gradient-to-br from-[#1010555f] to-[#402d0075] rounded-2xl py-6 md:p-8 mb-4 md:mb-8 backdrop-blur-lg"
-        >
-            <h2 class="text-3xl font-medium text-yellow-400 text-center mb-8">
-                Success Stories
-            </h2>
-            <swiper-container class="w-full md:pb-10">
-                {#each testimonials as testimonial, i}
-                    <swiper-slide
-                        class="flex justify-center items-start md:pb-6 h-[350px]"
-                    >
-                        <div
-                            class="w-full max-w-[90%] h-full bg-[#00004099] rounded-xl p-6 text-left border border-blue-400/20 hover:border-yellow-400/30 transition-all duration-300 flex flex-col"
-                        >
-                            <blockquote
-                                class="italic text-[#e4f6fb] leading-7 whitespace-pre-line overflow-y-scroll flex-1 custom-scrollbar pr-2"
-                            >
-                                {@html testimonial.quote}
-                            </blockquote>
-                            <p
-                                class="text-right text-white font-bold mt-4 text-sm pt-2 border-t border-blue-400/20"
-                            >
-                                {testimonial.name} - {testimonial.position}, {testimonial.airline}
+            </div>
+
+        </section>
+        <section class="container mx-auto px-4 sm:px-6 py-12 md:py-16" id="cassidy">
+            <div class="max-w-6xl mx-auto">
+                <!-- Title Section -->
+                <div class="text-center mb-12 md:mb-16">
+                    <h3 class="text-2xl sm:text-3xl lg:text-4xl roboto-black uppercase leading-relaxed">
+                        <span class="text-[hsl(var(--accent))] block mb-2">30+ years of experience</span>
+                        <span class="text-[#f3f3f3]">In airline assessment</span>
+                    </h3>
+                </div>
+
+                <!-- Content Grid -->
+                <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+                    <!-- Image container -->
+                    <div class="aspect-[4/3] md:aspect-[16/9] lg:aspect-[4/3] overflow-hidden rounded-lg order-2 lg:order-1">
+                        <Img
+                                class="w-full h-full object-cover"
+                                src={planeDenis}
+                                alt="Denis Cassidy preparing a pilot for interview"
+                        />
+                    </div>
+
+                    <!-- Text Content -->
+                    <div class="space-y-8 lg:space-y-12 order-1 lg:order-2">
+                        <h4 class="text-white text-3xl sm:text-4xl roboto-black">Denis Cassidy</h4>
+
+                        <!-- Background -->
+                        <div class="space-y-4">
+                    <span class="text-[hsl(var(--accent))] text-lg sm:text-xl roboto-medium block">
+                        Background
+                    </span>
+                            <p class="text-primary-foreground text-lg sm:text-xl roboto-regular leading-relaxed">
+                                Former airline assessor with extensive experience across
+                                <strong> Europe and Middle East</strong> carriers. Specialised in delivering
+                                personalіsed interview preparation via <strong>Teams</strong>, tailored to
+                                your specific CV and target airline.
                             </p>
                         </div>
-                    </swiper-slide>
-                {/each}
-            </swiper-container>
-        </div>
 
-        <!-- Images Section -->
-        <!-- <div class=" rounded-2xl mb-4 md:mb-8 backdrop-blur-lg">
-            <swiper-container class="w-full">
-                {#each images as img, i}
-                    <swiper-slide
-                        class="flex justify-center items-start h-[600px] select-none"
-                    >
-                        <div
-                            class="w-full h-full relative overflow-hidden rounded-xl"
-                        >
-                            <img
-                                src={img.src}
-                                alt={img.alt}
-                                class="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
-                                loading="lazy"
+                        <!-- Success Track Record -->
+                        <div class="space-y-4">
+                    <span class="text-[hsl(var(--accent))] text-lg sm:text-xl roboto-medium block">
+                        Success Track Record
+                    </span>
+                            <p class="text-primary-foreground text-lg sm:text-xl roboto-regular mb-6">
+                                Successfully mentored pilots who secured positions at:
+                            </p>
+
+                            <ul class="space-y-4">
+                                <li class="flex gap-3 text-primary-foreground text-lg sm:text-xl">
+                                    <span class="text-[hsl(var(--accent))]">•</span>
+                                    <span class="roboto-regular">
+                                <strong>Legacy Carriers</strong>: British Airways, Virgin Atlantic, Cathay Pacific
+                            </span>
+                                </li>
+                                <li class="flex gap-3 text-primary-foreground text-lg sm:text-xl">
+                                    <span class="text-[hsl(var(--accent))]">•</span>
+                                    <span class="roboto-regular">
+                                <strong>Low-Cost Airlines</strong>: Ryanair, EasyJet, Jet2
+                            </span>
+                                </li>
+                                <li class="flex gap-3 text-primary-foreground text-lg sm:text-xl">
+                                    <span class="text-[hsl(var(--accent))]">•</span>
+                                    <span class="roboto-regular">
+                                <strong>Cargo Operations</strong>: DHL
+                            </span>
+                                </li>
+                                <li class="flex gap-3 text-primary-foreground text-lg sm:text-xl">
+                                    <span class="text-[hsl(var(--accent))]">•</span>
+                                    <span class="roboto-regular">
+                                <strong>National Carriers</strong>: Aer Lingus
+                            </span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CTA Button -->
+                <div class="mt-12 md:mt-16 text-center lg:text-left">
+                    <AlertDialog.Root>
+                        <AlertDialog.Trigger class="ring-0 outline-0 inline-block">
+                            <CtaButton/>
+                        </AlertDialog.Trigger>
+
+                        <!-- Your existing AlertDialog.Content -->
+                    </AlertDialog.Root>
+                </div>
+            </div>
+        </section>
+        <Carousel.Root
+                opts={{
+                    align: "start",
+                    loop: true,
+                    duration: 2000,
+                    watchDrag: false
+                  }}
+                plugins={[
+                Autoplay({
+                  delay: 0,
+                    }),
+                  ]}
+                class="w-full bg-accent"
+        >
+            <Carousel.Content>
+                {#each airlines as airline, i (i)}
+                    <Carousel.Item class="basis-1/2 sm:basis-1/3 md:basis-1/4 lg:basis-1/6">
+                        <Img src={airline.image} alt={airline.title} loading="lazy" fetchpriority="low"
+                             class="w-full h-full max-w-[100px] lg:max-w-[150px] object-contain"/>
+                    </Carousel.Item>
+                {/each}
+            </Carousel.Content>
+        </Carousel.Root>
+        <section class="container mx-auto px-4 sm:px-6 py-12 md:py-16">
+            <div class="max-w-6xl mx-auto">
+                <h3 class="text-white text-2xl sm:text-3xl lg:text-4xl roboto-black mb-8 md:mb-12">
+                    Why Interview Preparation Matters
+                </h3>
+
+                <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
+                    <div class="space-y-8">
+                        <p class="text-primary-foreground text-lg sm:text-xl roboto-regular leading-relaxed">
+                            Even experienced pilots can fail at interview stage. Our preparation ensures you understand exactly
+                            what airlines are looking for.
+                        </p>
+
+                        <ul class="space-y-6 text-left">
+                            <li class="flex gap-4 text-primary-foreground">
+                                <span class="text-[hsl(var(--accent))] mt-2">•</span>
+                                <div class="text-lg sm:text-xl">
+                                    <strong class="block mb-1">Interview Structure</strong>
+                                    <span class="roboto-regular leading-relaxed">
+                                Master the competency-based format used by major airlines, including STAR methodology
+                                and behavior-focused questions.
+                            </span>
+                                </div>
+                            </li>
+
+                            <li class="flex gap-4 text-primary-foreground">
+                                <span class="text-[hsl(var(--accent))] mt-2">•</span>
+                                <div class="text-lg sm:text-xl">
+                                    <strong class="block mb-1">Assessment Process</strong>
+                                    <span class="roboto-regular leading-relaxed">
+                                Gain deep insights into airline evaluation methods, from technical assessments
+                                to group exercises and simulator checks.
+                            </span>
+                                </div>
+                            </li>
+
+                            <li class="flex gap-4 text-primary-foreground">
+                                <span class="text-[hsl(var(--accent))] mt-2">•</span>
+                                <div class="text-lg sm:text-xl">
+                                    <strong class="block mb-1">Interview Techniques</strong>
+                                    <span class="roboto-regular leading-relaxed">
+                                Learn proven strategies for articulating your experience effectively while
+                                demonstrating key competencies airlines seek.
+                            </span>
+                                </div>
+                            </li>
+
+                            <li class="flex gap-4 text-primary-foreground">
+                                <span class="text-[hsl(var(--accent))] mt-2">•</span>
+                                <div class="text-lg sm:text-xl">
+                                    <strong class="block mb-1">Airline Requirements</strong>
+                                    <span class="roboto-regular leading-relaxed">
+                                Stay updated with current industry standards, regulatory changes, and specific
+                                airline expectations for pilot candidates.
+                            </span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="relative mt-8 lg:mt-0">
+                        <div class="aspect-[4/3] lg:aspect-[3/4] overflow-hidden rounded-lg">
+                            <Img
+                                    class="w-full h-full object-cover"
+                                    src={planeDenis2}
+                                    alt="Denis Cassidy"
                             />
                         </div>
-                    </swiper-slide>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="container mx-auto py-12">
+            <h3 class="text-white text-center text-3xl font-medium">
+                FAQ
+            </h3>
+            <Accordion.Root type="single" class="mx-auto w-full mt-6 text-left sm:max-w-[70%]">
+                {#each faqs as faq, i (i)}
+                    <Accordion.Item class="border-b-primary-foreground/40" value={`item-${i}`}>
+                        <Accordion.Trigger class="text-left text-white">
+                            {faq.question}
+                        </Accordion.Trigger>
+                        <Accordion.Content class="text-primary-foreground leading-relaxed">
+                            {faq.answer}
+                        </Accordion.Content>
+                    </Accordion.Item>
                 {/each}
-            </swiper-container>
-        </div> -->
+            </Accordion.Root>
+        </section>
+
     </main>
-    <!-- Footer -->
-    <footer class="relative z-10 w-full mt-auto">
-        <div class="max-w-[1200px] mx-auto p-4 text-center">
-            <div class="text-[#e4f6fb] text-sm opacity-75">
-                © {new Date().getFullYear()} Denis Cassidy. All rights reserved.
+    <footer class="relative bg-accent text-white mt-16">
+        <!-- Top wave edge -->
+        <div class="absolute inset-x-0 -top-20 w-full">
+            <svg
+                    preserveAspectRatio="none"
+                    width="100%"
+                    height="80"
+                    viewBox="0 0 1440 80"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="transform translate-y-1 fill-accent"
+            >
+                <path
+                        d="M0 80
+                   L0 40
+                   Q360 0 720 40
+                   Q1080 80 1440 40
+                   L1440 80
+                   Z"
+                />
+            </svg>
+        </div>
+
+        <div class="relative pb-10">
+            <div class="max-w-6xl mx-auto px-4">
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
+                    <div class="flex items-center space-x-4">
+                        <Logo class="text-primary fill-primary"/>
+                    </div>
+                    <div class="space-y-4 text-primary">
+                        <div class="flex items-center space-x-3">
+                            <Phone class="h-5 w-5 text-primary"/>
+                            <a
+                                    href="tel:+353868167242"
+                                    class="hover:text-primary/80 transition-colors"
+                            >
+                                +353 868 167 242
+                            </a>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <Mail class="h-5 w-5 text-primary"/>
+                            <a
+                                    href="mailto:dencas@pilotinterviewpreparation.com"
+                                    class="hover:text-primary/80 transition-colors"
+                            >
+                                dencas@pilotinterviewpreparation.com
+                            </a>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+        <span class="block py-3.5 text-xs bg-primary">
+             2024 Denis Cassidy. All rights reserved.
+        </span>
     </footer>
+
 </div>
-
-<style>
-    :root {
-        --swiper-pagination-bottom: -0.8rem;
-    }
-    :global(swiper-container) {
-        width: 100%;
-        height: auto;
-    }
-
-    :global(swiper-slide) {
-        height: auto;
-        display: flex;
-        justify-content: center;
-        align-items: flex-start;
-    }
-
-    :global(.custom-scrollbar::-webkit-scrollbar) {
-        width: 8px;
-        background: rgba(0, 0, 64, 0.3);
-    }
-
-    :global(.custom-scrollbar::-webkit-scrollbar-track) {
-        background: rgba(0, 0, 64, 0.3);
-        border-radius: 4px;
-    }
-
-    :global(.custom-scrollbar::-webkit-scrollbar-thumb) {
-        background-color: rgba(250, 204, 21, 0.4);
-        border-radius: 4px;
-    }
-
-    /* Firefox scrollbar - always visible */
-    :global(.custom-scrollbar) {
-        scrollbar-width: thin;
-        scrollbar-color: rgba(250, 204, 21, 0.4) rgba(0, 0, 64, 0.3);
-    }
-
-    #cta-card {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        flex-wrap: wrap;
-        background-size: 30px 30px;
-        background-position: center;
-        background-image: linear-gradient(60deg, #0000407a, #402d006a);
-    }
-
-    #cta-card::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(
-            90deg,
-            transparent,
-            rgba(255, 255, 255, 0.1),
-            transparent
-        );
-        transition: 0.4s;
-    }
-
-    #cta-card:hover::before {
-        left: 100%;
-    }
-
-    @media (max-width: 768px) {
-        #cta-card {
-            flex-direction: column;
-            gap: 1rem;
-            text-align: center;
-        }
-
-        #cta-card > div:first-child {
-            padding-right: 0;
-        }
-
-        #cta-card > div:last-child {
-            width: 100%;
-            justify-content: center;
-        }
-    }
-</style>

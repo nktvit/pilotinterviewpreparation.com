@@ -1,36 +1,36 @@
 {
-  "name": "gp-svelte",
-  "version": "0.0.1",
-  "private": true,
-  "files": [
-    "dist"
-  ],
-  "svelte": "dist/index.js",
-  "exports": {
-    ".": {
-      "svelte": "./dist/index.js"
-    }
-  },
-  "scripts": {
-    "dev": "vite dev",
-    "build": "vite build",
-    "preview": "vite preview"
-  },
-  "devDependencies": {
-    "@sveltejs/adapter-auto": "^3.0.0",
-    "@sveltejs/adapter-static": "^3.0.5",
-    "@sveltejs/kit": "^2.0.0",
-    "@sveltejs/vite-plugin-svelte": "^3.0.0",
-    "@tailwindcss/typography": "^0.5.14",
-    "@zerodevx/svelte-img": "^2.1.2",
-    "autoprefixer": "^10.4.20",
-    "svelte": "^4.2.7",
-    "tailwindcss": "^3.4.9",
-    "vite": "^5.0.3"
-  },
-  "type": "module",
-  "dependencies": {
-    "lucide-svelte": "^0.453.0",
-    "swiper": "^11.1.14"
-  }
+	"name": "gp-svelte",
+	"version": "0.0.1",
+	"private": true,
+	"scripts": {
+		"dev": "vite dev",
+		"build": "vite build",
+		"preview": "vite preview"
+	},
+	"devDependencies": {
+		"@sveltejs/adapter-auto": "^3.3.1",
+		"@sveltejs/adapter-static": "^3.0.6",
+		"@sveltejs/kit": "^2.9.0",
+		"@sveltejs/vite-plugin-svelte": "^5.0.1",
+		"@zerodevx/svelte-img": "^2.1.2",
+		"autoprefixer": "^10.4.20",
+		"bits-ui": "^1.0.0-next.71",
+		"clsx": "^2.1.1",
+		"embla-carousel-svelte": "^8.5.1",
+		"svelte": "^5.8.1",
+		"tailwind-merge": "^2.5.5",
+		"tailwind-variants": "^0.3.0",
+		"tailwindcss": "^3.4.16",
+		"tailwindcss-animate": "^1.0.7",
+		"vite": "^6.0.3"
+	},
+	"type": "module",
+	"dependencies": {
+		"@tailwindcss/container-queries": "^0.1.1",
+		"@tailwindcss/forms": "^0.5.9",
+		"@tailwindcss/typography": "^0.5.15",
+		"embla-carousel-autoplay": "^8.5.1",
+		"embla-carousel-wheel-gestures": "^8.0.1",
+		"lucide-svelte": "^0.468.0"
+	}
 }
