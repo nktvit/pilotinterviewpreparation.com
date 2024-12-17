@@ -11,6 +11,8 @@
         --foreground: 222.2 84% 4.9%;
         --muted: 210 40% 96.1%;
         --muted-foreground: 215.4 16.3% 46.9%;
+        --accent: 45 100 59%;
+        --accent-foreground: 222.2 47.4% 11.2%;
         --popover: 0 0% 100%;
         --popover-foreground: 222.2 84% 4.9%;
         --card: 0 0% 100%;
@@ -21,8 +23,6 @@
         --primary-foreground: 0 0% 77%;
         --secondary: 210 40% 96.1%;
         --secondary-foreground: 222.2 47.4% 11.2%;
-        --accent: 210 40% 96.1%;
-        --accent-foreground: 222.2 47.4% 11.2%;
         --destructive: 0 72.2% 50.6%;
         --destructive-foreground: 210 40% 98%;
         --ring: 222.2 84% 4.9%;
@@ -42,6 +42,8 @@
         --foreground: 210 40% 98%;
         --muted: 217.2 32.6% 17.5%;
         --muted-foreground: 215 20.2% 65.1%;
+        --accent: 45 100 59%;
+        --accent-foreground: 210 40% 98%;
         --popover: 222.2 84% 4.9%;
         --popover-foreground: 210 40% 98%;
         --card: 222.2 84% 4.9%;
@@ -52,8 +54,6 @@
         --primary-foreground: 222.2 47.4% 11.2%;
         --secondary: 217.2 32.6% 17.5%;
         --secondary-foreground: 210 40% 98%;
-        --accent: 217.2 32.6% 17.5%;
-        --accent-foreground: 210 40% 98%;
         --destructive: 0 62.8% 30.6%;
         --destructive-foreground: 210 40% 98%;
         --ring: 212.7 26.8% 83.9%;
@@ -148,23 +148,23 @@
     }
 
     h1 {
-        @apply text-5xl;
+        @apply text-5xl md:text-7xl lg:text-8xl 2xl:text-9xl;
         @apply roboto-condensed;
-        @apply uppercase leading-snug
+        @apply uppercase leading-snug md:leading-tight;
     }
 
     h2 {
-        @apply text-xl;
+        @apply text-lg md:text-xl lg:text-2xl;
         @apply roboto-flex-medium
     }
 
     h3 {
-        @apply text-3xl;
+        @apply text-3xl lg:text-4xl;
         @apply roboto-black
     }
     p {
         @apply text-lg;
-        @apply roboto-medium;
+        @apply roboto-regular;
     }
 
     strong {
@@ -187,4 +187,23 @@
         @apply verdana-pro;
 
     }
+
+    #cassidy h3 {
+        @apply verdana-pro;
+        @apply leading-4
+    }
+    #cassidy h3 span:first-child {
+        @apply text-2xl;
+        background: linear-gradient(90deg, #FFB62E 4.5%, #FFEE2E 23%, #E0FF2E 43%, #B9FF2E 63.5%, #85FF2E 86.5%);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    #cassidy h3 span:last-child {
+        @apply text-xl;
+    }
+
+
+
+
 }
