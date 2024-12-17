@@ -407,129 +407,92 @@
 
         </section>
         <section class="container mx-auto px-4 sm:px-6 py-12 md:py-16" id="cassidy">
-            <!-- Title section with consistent spacing -->
-            <div class="text-center mb-12 md:mb-16">
-                <h3 class="font-roboto text-2xl sm:text-3xl font-medium uppercase leading-relaxed">
-                    <span class="text-[#ffb52d] block mb-2">30+ years of experience</span>
-                    <span class="text-[#f3f3f3]">In airline assessment</span>
-                </h3>
-            </div>
-
-            <!-- Image container with fixed aspect ratio -->
-            <div class="aspect-square sm:aspect-[16/9] md:aspect-[2/1] overflow-hidden">
-                <Img
-                        class="w-full h-full object-cover"
-                        src={planeDenis}
-                        alt="Denis Cassidy"
-                />
-            </div>
-
-            <!-- Content section with consistent spacing -->
-            <div class="mt-12 md:mt-16 space-y-12 md:space-y-16 max-w-3xl text-left">
-                <h4 class="text-white text-3xl sm:text-4xl font-medium">Denis Cassidy</h4>
-
-                <!-- Background section -->
-                <div>
-                    <span class="text-accent text-lg sm:text-xl font-medium block mb-4">Background</span>
-                    <p class="text-primary-foreground text-lg sm:text-xl leading-relaxed">
-                        Former airline assessor with extensive experience across
-                        <strong>Europe and Middle East</strong> carriers. Specialised in delivering
-                        personalіsed interview preparation via <strong>Teams</strong>, tailored to
-                        your specific CV and target airline.
-                    </p>
+            <div class="max-w-6xl mx-auto">
+                <!-- Title Section -->
+                <div class="text-center mb-12 md:mb-16">
+                    <h3 class="text-2xl sm:text-3xl lg:text-4xl roboto-black uppercase leading-relaxed">
+                        <span class="text-[hsl(var(--accent))] block mb-2">30+ years of experience</span>
+                        <span class="text-[#f3f3f3]">In airline assessment</span>
+                    </h3>
                 </div>
 
-                <!-- Success Track Record section -->
-                <div>
-                    <span class="text-accent text-lg sm:text-xl font-medium block mb-4">Success Track Record</span>
-                    <p class="text-primary-foreground text-lg sm:text-xl mb-6">
-                        Successfully mentored pilots who secured positions at:
-                    </p>
+                <!-- Content Grid -->
+                <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+                    <!-- Image container -->
+                    <div class="aspect-[4/3] md:aspect-[16/9] lg:aspect-[4/3] overflow-hidden rounded-lg order-2 lg:order-1">
+                        <Img
+                                class="w-full h-full object-cover"
+                                src={planeDenis}
+                                alt="Denis Cassidy preparing a pilot for interview"
+                        />
+                    </div>
 
-                    <ul class="list-disc ml-7 text-primary-foreground text-lg sm:text-xl space-y-4">
-                        <li><strong>Legacy Carriers</strong>: British Airways, Virgin Atlantic, Cathay Pacific</li>
-                        <li><strong>Low-Cost Airlines</strong>: Ryanair, EasyJet, Jet2</li>
-                        <li><strong>Cargo Operations</strong>: DHL</li>
-                        <li><strong>National Carriers</strong>: Aer Lingus</li>
-                    </ul>
+                    <!-- Text Content -->
+                    <div class="space-y-8 lg:space-y-12 order-1 lg:order-2">
+                        <h4 class="text-white text-3xl sm:text-4xl roboto-black">Denis Cassidy</h4>
+
+                        <!-- Background -->
+                        <div class="space-y-4">
+                    <span class="text-[hsl(var(--accent))] text-lg sm:text-xl roboto-medium block">
+                        Background
+                    </span>
+                            <p class="text-primary-foreground text-lg sm:text-xl roboto-regular leading-relaxed">
+                                Former airline assessor with extensive experience across
+                                <strong> Europe and Middle East</strong> carriers. Specialised in delivering
+                                personalіsed interview preparation via <strong>Teams</strong>, tailored to
+                                your specific CV and target airline.
+                            </p>
+                        </div>
+
+                        <!-- Success Track Record -->
+                        <div class="space-y-4">
+                    <span class="text-[hsl(var(--accent))] text-lg sm:text-xl roboto-medium block">
+                        Success Track Record
+                    </span>
+                            <p class="text-primary-foreground text-lg sm:text-xl roboto-regular mb-6">
+                                Successfully mentored pilots who secured positions at:
+                            </p>
+
+                            <ul class="space-y-4">
+                                <li class="flex gap-3 text-primary-foreground text-lg sm:text-xl">
+                                    <span class="text-[hsl(var(--accent))]">•</span>
+                                    <span class="roboto-regular">
+                                <strong>Legacy Carriers</strong>: British Airways, Virgin Atlantic, Cathay Pacific
+                            </span>
+                                </li>
+                                <li class="flex gap-3 text-primary-foreground text-lg sm:text-xl">
+                                    <span class="text-[hsl(var(--accent))]">•</span>
+                                    <span class="roboto-regular">
+                                <strong>Low-Cost Airlines</strong>: Ryanair, EasyJet, Jet2
+                            </span>
+                                </li>
+                                <li class="flex gap-3 text-primary-foreground text-lg sm:text-xl">
+                                    <span class="text-[hsl(var(--accent))]">•</span>
+                                    <span class="roboto-regular">
+                                <strong>Cargo Operations</strong>: DHL
+                            </span>
+                                </li>
+                                <li class="flex gap-3 text-primary-foreground text-lg sm:text-xl">
+                                    <span class="text-[hsl(var(--accent))]">•</span>
+                                    <span class="roboto-regular">
+                                <strong>National Carriers</strong>: Aer Lingus
+                            </span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-            </div>
 
-            <!-- CTA Button with consistent spacing -->
-            <div class="mt-12 md:mt-16">
-                <AlertDialog.Root>
-                    <div class="text-center sm:text-left">
+                <!-- CTA Button -->
+                <div class="mt-12 md:mt-16 text-center lg:text-left">
+                    <AlertDialog.Root>
                         <AlertDialog.Trigger class="ring-0 outline-0 inline-block">
                             <CtaButton/>
                         </AlertDialog.Trigger>
-                    </div>
-                    <AlertDialog.Content
-                            class="w-[90vw] sm:max-w-lg md:max-w-xl lg:max-w-2xl bg-[rgb(1,23,55)] text-white">
-                        <AlertDialog.Header>
-                            <AlertDialog.Title class="text-2xl sm:text-3xl roboto-black text-white">
-                                Book Your Interview Preparation
-                            </AlertDialog.Title>
-                            <AlertDialog.Description
-                                    class="mt-4 roboto-regular text-lg leading-relaxed text-primary-foreground">
-                                Contact us by phone to schedule your personalized interview preparation session:
-                            </AlertDialog.Description>
-                        </AlertDialog.Header>
 
-                        <div class="py-6 space-y-6">
-                            <div class="flex flex-col items-center sm:items-start space-y-3">
-                                <div class="text-xl roboto-medium text-white">Book by Phone</div>
-
-                                <a href="tel:+353868167242"
-                                   class="flex items-center space-x-2 text-xl text-[hsl(var(--accent))] hover:text-[hsl(var(--accent))/90] transition-colors roboto-medium"
-                                >
-                                    <Phone class="h-5 w-5"/>
-                                    <span>+353 868 167 242</span>
-                                </a>
-                            </div>
-
-                            <div class="space-y-2">
-                                <div class="text-sm text-[hsl(var(--muted-foreground))] roboto-medium">
-                                    Available times for calls:
-                                </div>
-                                <div class="text-sm text-primary-foreground roboto-regular">
-                                    Monday - Friday: 9:00 AM - 6:00 PM (Irish Time)
-                                </div>
-                            </div>
-
-                            <div class="space-y-3">
-                                <div class="roboto-medium text-white">What to expect:</div>
-                                <ul class="space-y-2 text-sm text-[hsl(var(--muted-foreground))] roboto-regular">
-                                    <li class="flex items-center space-x-2">
-                                        <span class="text-[hsl(var(--accent))]">•</span>
-                                        <span>Brief discussion of your experience and goals</span>
-                                    </li>
-                                    <li class="flex items-center space-x-2">
-                                        <span class="text-[hsl(var(--accent))]">•</span>
-                                        <span>Overview of available session types</span>
-                                    </li>
-                                    <li class="flex items-center space-x-2">
-                                        <span class="text-[hsl(var(--accent))]">•</span>
-                                        <span>Scheduling your preparation session</span>
-                                    </li>
-                                    <li class="flex items-center space-x-2">
-                                        <span class="text-[hsl(var(--accent))]">•</span>
-                                        <span>Payment details and confirmation</span>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <AlertDialog.Footer class="sm:justify-between flex-col sm:flex-row gap-4">
-                            <div class="text-sm text-[hsl(var(--muted-foreground))] roboto-regular">
-                                We look forward to helping you succeed in your airline interview
-                            </div>
-                            <AlertDialog.Cancel
-                                    class="mt-2 sm:mt-0 bg-[hsl(var(--accent))] text-[hsl(var(--accent-foreground))] hover:bg-[hsl(var(--accent))/90] transition-colors roboto-medium">
-                                Close
-                            </AlertDialog.Cancel>
-                        </AlertDialog.Footer>
-                    </AlertDialog.Content>
-                </AlertDialog.Root>
+                        <!-- Your existing AlertDialog.Content -->
+                    </AlertDialog.Root>
+                </div>
             </div>
         </section>
         <Carousel.Root
