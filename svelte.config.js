@@ -11,7 +11,10 @@ export default {
 			assets: 'build',
 			fallback: 'index.html',
 			precompress: true,
-			strict: true
+			strict: true,
+			prerender: {
+				default: true
+			}
 		}),
 		paths: {
 			base: dev ? '' : process.env.BASE_PATH,

@@ -396,9 +396,7 @@
                                 </span>
                         <div class="p-4">
                             <h4 class="text-white text-left text-3xl font-medium mt-3 mb-4">{slide.title}</h4>
-                            {#if currentContent}
-                                <p class="text-primary-foreground text-left text-xl">{@html currentContent}</p>
-                            {/if}
+                                <p class="text-primary-foreground text-left text-xl">{@html slide.content}</p>
                         </div>
                     </div>
                 {/each}
@@ -428,7 +426,7 @@
                     </div>
 
                     <!-- Text Content -->
-                    <div class="space-y-8 lg:space-y-12 order-1 lg:order-2">
+                    <div class="space-y-8 lg:space-y-12 order-1 text-left lg:order-2">
                         <h4 class="text-white text-3xl sm:text-4xl roboto-black">Denis Cassidy</h4>
 
                         <!-- Background -->
@@ -661,7 +659,7 @@
                 </div>
             </div>
         </div>
-        <span class="block py-3.5 text-xs bg-primary">
+        <span class="block py-3.5 text-xs text-center bg-primary">
              2024 Denis Cassidy. All rights reserved.
         </span>
     </footer>
