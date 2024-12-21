@@ -1,7 +1,7 @@
 <script>
     // Images
     import yellowHelicopter from '$lib/assets/yellow-helicopter.jpeg?as=run'
-    import examinationCenter from '$lib/assets/examination-center.png?as=run'
+    import examinationCenter from '$lib/assets/examination-center.png?normalize&as=run'
     import cvWriting from '$lib/assets/cv-writing.jpg?as=run'
     import planeIrish from '$lib/assets/plane-irish.jpg?as=run'
     import groupTraining from '$lib/assets/group-training.png?as=run'
@@ -43,11 +43,11 @@
             title: "Strategies",
             content: `
             <span>Master proven&nbsp;</span><strong>structured interview techniques</strong>
-            <span>&nbsp;that Irish and European airlines use today. Through one-to-one coaching, you'll develop the&nbsp;</span>
+            <span>&nbsp;that global airlines use today. Through one-to-one coaching, you'll develop the&nbsp;</span>
             <strong>competency-based answers</strong>
             <span>&nbsp;that assessors look for. Our approach combines current airline standards with your personal experience, ensuring you interview with confidence and authenticity.</span>
             `,
-            caption: "Examination Center",
+            caption: "Assessment Centre",
             image: examinationCenter
         },
         {
@@ -55,12 +55,12 @@
             content: `
             <span>Powerful&nbsp;<strong>airline pilot CV</strong>&nbsp;that aligns with recruitment systems and catches attention. Your flying experience will be presented to match exactly what airlines want to see. We'll transform your career highlights into compelling achievements that showcase your true potential as a candidate.</span><p><br></p>
             `,
-            caption: "Mrs. Jane Doe working on her CV",
+            caption: "CV development",
             image: cvWriting
 
         },
         {
-            title: "Trainings",
+            title: "Training",
             content: `
             <span>Walk into your&nbsp;</span><strong>airline assessment day</strong><span>&nbsp;fully prepared and confident. Our realistic&nbsp;</span><strong>group exercise practice</strong><span>&nbsp;mirrors what you'll face at major carriers. From technical questions to team scenarios, you'll be ready to demonstrate your capabilities naturally and effectively.</span>`,
             caption: "Group Training",
@@ -70,14 +70,14 @@
         {
             title: "Airline-Specific",
             content: `Gain valuable insights into current&nbsp;<strong>airline selection processes</strong>&nbsp;and requirements. Learn from recently successful&nbsp;<strong>pilot interviews</strong>&nbsp;what works right now. Our continuously updated guidance helps you understand each airline's priorities and culture, maximizing your interview success rate.`,
-            caption: "Irish Air Corps plane",
+            caption: "Irish Air Corps aircraft",
             image: planeIrish
 
         },
         {
             title: "Professional Development",
             content: `<span>Master the key&nbsp;</span><strong>airline competencies</strong><span>&nbsp;that define successful candidates. Show deep understanding of modern&nbsp;</span><strong>commercial aviation</strong><span>&nbsp;operations and challenges. We'll help you demonstrate the natural&nbsp;</span><strong>leadership abilities</strong><span>&nbsp;that make you stand out as the ideal pilot for their team.</span>`,
-            caption: "Virgin Atlantic plane",
+            caption: "Virgin Atlantic aircraft",
             image: professionalDevelopment
 
         }
@@ -139,7 +139,7 @@
         },
         {
             question: "What experience level do you cater to?",
-            answer: "We support pilots at all career stages: newly qualified pilots seeking their first airline position, experienced pilots transitioning between carriers, and captains preparing for command upgrades."
+            answer: "We support pilots at all career stages: newly qualified pilots seeking their first airline position, experienced pilots transitioning between carriers, and pilots preparing for command upgrades."
         },
         {
             question: "How do you stay current with airline requirements?",
@@ -150,6 +150,33 @@
             answer: "Your package includes a 2-hour personalized session, CV review, competency framework guidance, current airline-specific scenarios, group exercise strategies, and post-session support until your interview date."
         }
     ];
+    const preparationMatters = [
+        {
+            title: "Interview Structure",
+            content: `
+           <span>Master the&nbsp;</span><strong>competency-based interviews</strong>
+            <span>&nbsp;with expert guidance on behavioral scenarios and airline assessment techniques.</span>
+            `,
+        },
+        {
+            title: "Assessment Process",
+            content: `
+    <span>Gain deep insights into </span><strong>airline selection methods</strong><span>, from technical assessments to group exercises and simulator scenarios.</span>
+    `,
+        },
+        {
+            title: "Interview Techniques",
+            content: `
+    <span>Learn proven strategies for </span><strong>structured airline interviews</strong><span> while showcasing the essential qualities airlines value.</span>
+    `,
+        },
+        {
+            title: "Airline Requirements",
+            content: `
+    <span>Stay updated with </span><strong>airline selection standards</strong><span>, interview changes, and specific airline expectations for pilot candidates.</span>
+    `,
+        }
+    ]
 
     //  States
     let api = $state(null);
@@ -188,25 +215,26 @@
 </script>
 
 <div class=" text-center md:text-left bg-[rgb(1,23,55)]">
-    <header class="container mx-auto flex flex-col min-h-[90vh] h-[90vh] md:max-w-2xl lg:max-w-5xl relative">
+    <header class="container mx-auto flex flex-col min-h-[90vh] h-[90vh] md:max-w-3xl lg:max-w-4xl xl:max-w-5xl 2xl:max-w-6xl relative">
         <!-- Logo with fixed position from top -->
         <div class="pt-5">
             <Logo class="text-white fill-white"/>
         </div>
 
         <!-- Main content with fixed heights and spacing -->
-        <div class="flex-1 flex flex-col justify-between mt-16 sm:mt-20 text-white">
+        <div class="flex-1 flex flex-col justify-between mt-16 sm:mt-20 md:mt-10 lg:mt-5 xl:mt-5 text-white">
             <!-- Title section with consistent spacing -->
             <div class="flex-grow-0">
-                <h1 class="text-4xl sm:text-5xl lg:text-6xl leading-tight">
+                <h1 class="text-4xl sm:text-5xl lg:text-6xl 2xl:text-7xl leading-tight">
                     Land your<br/>dream<br/>airline Job
                 </h1>
             </div>
 
             <!-- CTA section with fixed bottom spacing -->
             <div class="flex flex-col mb-8 sm:mb-12">
-                <h2 class="mb-6 text-xl sm:text-2xl leading-relaxed">
-                    Book Your Session with a<br/>Former Airline Assessor
+                <h2 class="mb-6 text-lg sm:text-xl md:text-2xl leading-relaxed">
+                    Book your <strong>Teams session</strong><br/>with an experienced pilot<br/>assessment and
+                    selection<br/>consultant
                 </h2>
                 <AlertDialog.Root>
                     <div class="text-center sm:text-left">
@@ -290,33 +318,36 @@
         <!--            <a class="px-3 py-2 text-white hover:text-white/80 transition-colors" href="#">Contact</a>-->
         <!--        </div>-->
     </header>
-    <main class=" flex flex-col">
-        <section class="relative h-[600px] md:h-[600px] py-12">
-            <Img
-                    class="w-full h-[65%] absolute top-0 left-0 object-cover object-[55%_center]"
-                    src={yellowHelicopter}
-                    alt="A yellow helicopter"
-            />
-            <!--black overlay-->
-            <div class="absolute h-[65%] inset-0 bg-black/35 -z-5"></div>
-            <div class="h-full flex flex-col relative items-center text-center mt-10 justify-between">
-                <h3 class="text-white">Trainings That<br/>Get Results</h3>
-                <div class="backdrop-blur w-full">
-                    <div class="pt-3">
-                        <p class="text-2xl font-bold text-primary-foreground mb-6 mx-auto w-[80%] md:w-[40%] lg:w-[25%]">From recent graduates<br>to <strong>command
-                            upgrades</strong>, we
-                            prepare pilots for their <strong>target airlines</strong>. Our proven approach combines
-                            current
-                            industry knowledge with <strong>personalised guidance</strong>.</p>
-                    </div>
+    <main class="flex flex-col">
+        <section id="parallax" class="relative h-[400px] md:h-[600px] lg:h-[650px] overflow-hidden">
+            <div class="absolute inset-0">
+                <div class="relative w-[140%] sm:w-full -left-[40%] sm:left-0 h-full">
+                    <ImgParallax
+                            class="w-full h-full object-cover"
+                            factor="0.85"
+                            src={planeIrish}
+                            alt="Aircraft"
+                    />
                 </div>
-
-
+                <div class="absolute inset-0 bg-black/40"/>
+            </div>
+            <div class="relative z-10 h-full flex flex-col justify-center items-center px-4 md:px-6 lg:px-8">
+                <h3 class="text-3xl md:text-4xl lg:text-5xl text-white text-center font-bold mb-8 md:mb-16">
+                    Trainings That<br/>Get Results
+                </h3>
+                <div class="max-w-xs lg:max-w-lg">
+                    <p class="text-xl md:text-xl lg:text-2xl text-primary-foreground text-center font-bold">
+                        From recent graduates<br class="md:hidden"/> to <strong>command upgrades</strong>, we
+                        prepare pilots for their <strong>airline interview</strong>. Our proven approach combines
+                        current industry knowledge with <strong>personalised guidance</strong>.
+                    </p>
+                </div>
             </div>
         </section>
-        <section class="container mx-auto py-12">
+
+        <section class="container mx-auto py-12 sm:max-w-2xl xl:max-w-3xl">
             <!--desktop only-->
-            <div class="hidden sm:block mt-12 mx-auto w-full max-w-xl lg:max-w-2xl">
+            <div class="hidden sm:block mt-12 mx-auto">
                 <Carousel.Root
                         setApi={(emblaApi) => (api = emblaApi)}
                         opts={{
@@ -372,7 +403,7 @@
                     </div>
                 </ScrollArea>
 
-                <div class="h-[400px] w-[70%] mx-auto mt-6 ">
+                <div class="sm:h-[350px] w-[70%] mx-auto mt-6 ">
                     {#if currentContent}
                         <p class="text-primary-foreground text-2xl">{@html currentContent}</p>
                     {/if}
@@ -396,7 +427,7 @@
                                 </span>
                         <div class="p-4">
                             <h4 class="text-white text-left text-3xl font-medium mt-3 mb-4">{slide.title}</h4>
-                                <p class="text-primary-foreground text-left text-xl">{@html slide.content}</p>
+                            <p class="text-primary-foreground text-left text-xl">{@html slide.content}</p>
                         </div>
                     </div>
                 {/each}
@@ -404,25 +435,28 @@
             </div>
 
         </section>
-        <section class="container mx-auto px-4 sm:px-6 py-12 md:py-16" id="cassidy">
+        <section class="container mx-auto sm:max-w-2xl md:max-w-3xl lg:max-w-4xl py-12 md:py-16" id="cassidy">
             <div class="max-w-6xl mx-auto">
                 <!-- Title Section -->
                 <div class="text-center mb-12 md:mb-16">
                     <h3 class="text-2xl sm:text-3xl lg:text-4xl roboto-black uppercase leading-relaxed">
                         <span class="text-[hsl(var(--accent))] block mb-2">30+ years of experience</span>
-                        <span class="text-[#f3f3f3]">In airline assessment</span>
+                        <span class="text-[#f3f3f3]">In pilot assessment</span>
                     </h3>
                 </div>
 
                 <!-- Content Grid -->
-                <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+                <div class="grid md:grid-cols-2 gap-10 lg:gap-16 items-start relative">
                     <!-- Image container -->
-                    <div class="aspect-[4/3] md:aspect-[16/9] lg:aspect-[4/3] overflow-hidden rounded-lg order-2 lg:order-1">
-                        <Img
-                                class="w-full h-full object-cover"
-                                src={planeDenis}
-                                alt="Denis Cassidy preparing a pilot for interview"
-                        />
+                    <div class="sticky top-[70vh] mx-auto max-w-md overflow-hidden  order-2 lg:order-1">
+                        <div class="aspect-[4/3] sm:aspect-[16/9] md:aspect-square lg:aspect-[4/3] ">
+                            <Img
+                                    class="w-full h-full object-cover rounded-lg"
+                                    src={planeDenis}
+                                    alt="Denis Cassidy preparing a pilot for interview"
+                            />
+                        </div>
+
                     </div>
 
                     <!-- Text Content -->
@@ -435,7 +469,8 @@
                         Background
                     </span>
                             <p class="text-primary-foreground text-lg sm:text-xl roboto-regular leading-relaxed">
-                                Former airline assessor with extensive experience across
+                                Pilot assessment and selection consultant with extensive airline and ATO experience
+                                across
                                 <strong> Europe and Middle East</strong> carriers. Specialised in delivering
                                 personalіsed interview preparation via <strong>Teams</strong>, tailored to
                                 your specific CV and target airline.
@@ -482,13 +517,11 @@
                 </div>
 
                 <!-- CTA Button -->
-                <div class="mt-12 md:mt-16 text-center lg:text-left">
+                <div class="mt-12 md:mt-16 text-center">
                     <AlertDialog.Root>
                         <AlertDialog.Trigger class="ring-0 outline-0 inline-block">
                             <CtaButton/>
                         </AlertDialog.Trigger>
-
-                        <!-- Your existing AlertDialog.Content -->
                     </AlertDialog.Root>
                 </div>
             </div>
@@ -505,7 +538,7 @@
                   delay: 0,
                     }),
                   ]}
-                class="w-full bg-accent"
+                class="w-full bg-accent/90"
         >
             <Carousel.Content>
                 {#each airlines as airline, i (i)}
@@ -516,7 +549,7 @@
                 {/each}
             </Carousel.Content>
         </Carousel.Root>
-        <section class="container mx-auto px-4 sm:px-6 py-12 md:py-16">
+        <section class="container mx-auto py-12 md:py-16 sm:max-w-2xl md:max-w-3xl lg:max-w-4xl">
             <div class="max-w-6xl mx-auto">
                 <h3 class="text-white text-2xl sm:text-3xl lg:text-4xl roboto-black mb-8 md:mb-12">
                     Why Interview Preparation Matters
@@ -525,54 +558,23 @@
                 <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
                     <div class="space-y-8">
                         <p class="text-primary-foreground text-lg sm:text-xl roboto-regular leading-relaxed">
-                            Even experienced pilots can fail at interview stage. Our preparation ensures you understand exactly
+                            Even experienced pilots can fail at interview stage. Our preparation ensures you understand
+                            exactly
                             what airlines are looking for.
                         </p>
 
                         <ul class="space-y-6 text-left">
-                            <li class="flex gap-4 text-primary-foreground">
-                                <span class="text-[hsl(var(--accent))] mt-2">•</span>
-                                <div class="text-lg sm:text-xl">
-                                    <strong class="block mb-1">Interview Structure</strong>
-                                    <span class="roboto-regular leading-relaxed">
-                                Master the competency-based format used by major airlines, including STAR methodology
-                                and behavior-focused questions.
-                            </span>
-                                </div>
-                            </li>
-
-                            <li class="flex gap-4 text-primary-foreground">
-                                <span class="text-[hsl(var(--accent))] mt-2">•</span>
-                                <div class="text-lg sm:text-xl">
-                                    <strong class="block mb-1">Assessment Process</strong>
-                                    <span class="roboto-regular leading-relaxed">
-                                Gain deep insights into airline evaluation methods, from technical assessments
-                                to group exercises and simulator checks.
-                            </span>
-                                </div>
-                            </li>
-
-                            <li class="flex gap-4 text-primary-foreground">
-                                <span class="text-[hsl(var(--accent))] mt-2">•</span>
-                                <div class="text-lg sm:text-xl">
-                                    <strong class="block mb-1">Interview Techniques</strong>
-                                    <span class="roboto-regular leading-relaxed">
-                                Learn proven strategies for articulating your experience effectively while
-                                demonstrating key competencies airlines seek.
-                            </span>
-                                </div>
-                            </li>
-
-                            <li class="flex gap-4 text-primary-foreground">
-                                <span class="text-[hsl(var(--accent))] mt-2">•</span>
-                                <div class="text-lg sm:text-xl">
-                                    <strong class="block mb-1">Airline Requirements</strong>
-                                    <span class="roboto-regular leading-relaxed">
-                                Stay updated with current industry standards, regulatory changes, and specific
-                                airline expectations for pilot candidates.
-                            </span>
-                                </div>
-                            </li>
+                            {#each preparationMatters as matter}
+                                <li class="flex gap-4 text-primary-foreground">
+                                    <span class="text-[hsl(var(--accent))] mt-1 text-3xl">•</span>
+                                    <div class="text-lg sm:text-xl">
+                                        <strong class="block mb-1 text-2xl">{matter.title}</strong>
+                                        <span class="roboto-regular leading-relaxed">
+                                {@html matter.content}
+                                </span>
+                                    </div>
+                                </li>
+                            {/each}
                         </ul>
                     </div>
 
@@ -588,17 +590,17 @@
                 </div>
             </div>
         </section>
-        <section class="container mx-auto py-12">
+        <section class="container mx-auto py-12 sm:max-w-xl md:max-w-2xl lg:max-w-3xl">
             <h3 class="text-white text-center text-3xl font-medium">
                 FAQ
             </h3>
-            <Accordion.Root type="single" class="mx-auto w-full mt-6 text-left sm:max-w-[70%]">
+            <Accordion.Root type="single" class="mx-auto w-full mt-6 text-left ">
                 {#each faqs as faq, i (i)}
                     <Accordion.Item class="border-b-primary-foreground/40" value={`item-${i}`}>
-                        <Accordion.Trigger class="text-left text-white">
+                        <Accordion.Trigger class="text-left text-white text-lg">
                             {faq.question}
                         </Accordion.Trigger>
-                        <Accordion.Content class="text-primary-foreground leading-relaxed">
+                        <Accordion.Content class="text-primary-foreground leading-relaxed text-md">
                             {faq.answer}
                         </Accordion.Content>
                     </Accordion.Item>
@@ -652,7 +654,7 @@
                                     href="mailto:dencas@pilotinterviewpreparation.com"
                                     class="hover:text-primary/80 transition-colors"
                             >
-                                dencas@pilotinterviewpreparation.com
+                                info@pilotinterviewpreperation.com
                             </a>
                         </div>
                     </div>
@@ -665,3 +667,14 @@
     </footer>
 
 </div>
+<style>
+    #parallax {
+        isolation: isolate;
+    }
+
+    /* Optional: Add smooth transition for parallax effect */
+    :global(.parallax-img) {
+        transition: transform 50ms linear;
+        will-change: transform;
+    }
+</style>
