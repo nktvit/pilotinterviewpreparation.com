@@ -148,7 +148,7 @@
     }
 
     h1 {
-        @apply text-5xl md:text-7xl lg:text-8xl 2xl:text-9xl;
+        @apply text-4xl sm:text-5xl lg:text-6xl 2xl:text-7xl leading-tight;
         @apply roboto-condensed;
         @apply uppercase leading-snug md:leading-tight;
     }

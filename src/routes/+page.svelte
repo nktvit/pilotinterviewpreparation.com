@@ -215,29 +215,33 @@
 </script>
 
 <div class=" text-center md:text-left bg-[rgb(1,23,55)]">
-    <header class="container mx-auto flex flex-col min-h-[90vh] h-[90vh] md:max-w-3xl lg:max-w-4xl xl:max-w-5xl 2xl:max-w-6xl relative">
+    <header class="container mx-auto flex flex-col xs:min-h-[90vh] xs:h-[90vh]
+    md:max-w-3xl lg:max-w-4xl xl:max-w-5xl 2xl:max-w-7xl relative">
         <!-- Logo with fixed position from top -->
-        <div class="pt-5">
+        <div class="pt-5 landscape:md:pt-0 landscape:lg:pt-5">
             <Logo class="text-white fill-white"/>
         </div>
 
         <!-- Main content with fixed heights and spacing -->
-        <div class="flex-1 flex flex-col justify-between mt-16 sm:mt-20 md:mt-10 lg:mt-5 xl:mt-5 text-white">
+        <div class="flex-1 flex flex-col landscape:flex-row landscape:lg:flex-col justify-around
+        mt-12 sm:mt-20 md:mt-5
+         mb-8 sm:mb-12 md:mb-16
+        text-white">
             <!-- Title section with consistent spacing -->
             <div class="flex-grow-0">
-                <h1 class="text-4xl sm:text-5xl lg:text-6xl 2xl:text-7xl leading-tight">
+                <h1 class="">
                     Land your<br/>dream<br/>airline Job
                 </h1>
             </div>
 
             <!-- CTA section with fixed bottom spacing -->
-            <div class="flex flex-col mb-8 sm:mb-12">
-                <h2 class="mb-6 text-lg sm:text-xl md:text-2xl leading-relaxed">
+            <div class="flex flex-col">
+                <h2 class="mb-6 text-primary-foreground text-lg sm:text-xl md:text-2xl leading-relaxed">
                     Book your <strong>Teams session</strong><br/>with an experienced pilot<br/>assessment and
                     selection<br/>consultant
                 </h2>
                 <AlertDialog.Root>
-                    <div class="text-center sm:text-left">
+                    <div class="text-center md:text-left">
                         <AlertDialog.Trigger class="ring-0 outline-0 inline-block">
                             <CtaButton/>
                         </AlertDialog.Trigger>
@@ -329,7 +333,7 @@
                             alt="Aircraft"
                     />
                 </div>
-                <div class="absolute inset-0 bg-black/40"/>
+                <div class="absolute inset-0 bg-black/50"></div>
             </div>
             <div class="relative z-10 h-full flex flex-col justify-center items-center px-4 md:px-6 lg:px-8">
                 <h3 class="text-3xl md:text-4xl lg:text-5xl text-white text-center font-bold mb-8 md:mb-16">
@@ -347,7 +351,7 @@
 
         <section class="container mx-auto py-12 sm:max-w-2xl xl:max-w-3xl">
             <!--desktop only-->
-            <div class="hidden sm:block mt-12 mx-auto">
+            <div class="hidden md:block landscape:lg:block mt-12 mx-auto">
                 <Carousel.Root
                         setApi={(emblaApi) => (api = emblaApi)}
                         opts={{
@@ -435,77 +439,73 @@
             </div>
 
         </section>
-        <section class="container mx-auto sm:max-w-2xl md:max-w-3xl lg:max-w-4xl py-12 md:py-16" id="cassidy">
-            <div class="max-w-6xl mx-auto">
-                <!-- Title Section -->
-                <div class="text-center mb-12 md:mb-16">
-                    <h3 class="text-2xl sm:text-3xl lg:text-4xl roboto-black uppercase leading-relaxed">
-                        <span class="text-[hsl(var(--accent))] block mb-2">30+ years of experience</span>
-                        <span class="text-[#f3f3f3]">In pilot assessment</span>
+        <section class="container mx-auto flex flex-col md:max-w-3xl lg:max-w-4xl xl:max-w-5xl 2xl:max-w-7xl py-8 sm:py-12 md:py-16" id="cassidy">
+            <div class="flex-1 flex flex-col">
+                <!-- Title Section - Improved spacing and responsive typography -->
+                <div class="text-center mb-8 sm:mb-12 md:mb-16">
+                    <h3 class="roboto-black uppercase leading-relaxed">
+                        <span class="text-xl sm:text-2xl lg:text-3xl text-[hsl(var(--accent))] block mb-2">30+ years of experience</span>
+                        <span class="text-2xl sm:text-3xl lg:text-4xl text-[#f3f3f3]">In pilot assessment</span>
                     </h3>
                 </div>
 
-                <!-- Content Grid -->
-                <div class="grid md:grid-cols-2 gap-10 lg:gap-16 items-start relative">
-                    <!-- Image container -->
-                    <div class="sticky top-[70vh] mx-auto max-w-md overflow-hidden  order-2 lg:order-1">
-                        <div class="aspect-[4/3] sm:aspect-[16/9] md:aspect-square lg:aspect-[4/3] ">
+                <!-- Content Grid - Improved responsive layout -->
+                <div class="grid md:grid-cols-2 gap-8 lg:gap-16 items-start relative">
+                    <!-- Image container - More responsive aspect ratios -->
+                    <div class="sticky top-20 mx-auto w-full max-w-lg overflow-hidden order-2 md:order-1">
+                        <div class="aspect-[4/3] xs:aspect-[16/9] sm:aspect-square lg:aspect-[4/3]">
                             <Img
                                     class="w-full h-full object-cover rounded-lg"
                                     src={planeDenis}
                                     alt="Denis Cassidy preparing a pilot for interview"
                             />
                         </div>
-
                     </div>
 
-                    <!-- Text Content -->
-                    <div class="space-y-8 lg:space-y-12 order-1 text-left lg:order-2">
-                        <h4 class="text-white text-3xl sm:text-4xl roboto-black">Denis Cassidy</h4>
+                    <!-- Text Content - Improved spacing and typography -->
+                    <div class="space-y-6 sm:space-y-8 lg:space-y-12 order-1 md:order-2">
+                        <h4 class="text-white text-2xl sm:text-3xl lg:text-4xl roboto-black">Denis Cassidy</h4>
 
-                        <!-- Background -->
-                        <div class="space-y-4">
+                        <!-- Background - Consistent spacing -->
+                        <div class="space-y-3 sm:space-y-4">
                     <span class="text-[hsl(var(--accent))] text-lg sm:text-xl roboto-medium block">
                         Background
                     </span>
-                            <p class="text-primary-foreground text-lg sm:text-xl roboto-regular leading-relaxed">
-                                Pilot assessment and selection consultant with extensive airline and ATO experience
-                                across
-                                <strong> Europe and Middle East</strong> carriers. Specialised in delivering
-                                personalіsed interview preparation via <strong>Teams</strong>, tailored to
-                                your specific CV and target airline.
+                            <p class="text-primary-foreground text-base sm:text-lg lg:text-xl roboto-regular leading-relaxed">
+                                Pilot assessment and selection consultant with extensive airline and ATO experience across
+                                <strong>Europe and Middle East</strong> carriers. Specialised in delivering personalіsed interview preparation via <strong>Teams</strong>, tailored to your specific CV and target airline.
                             </p>
                         </div>
 
-                        <!-- Success Track Record -->
-                        <div class="space-y-4">
+                        <!-- Success Track Record - Improved list spacing -->
+                        <div class="space-y-3 sm:space-y-4">
                     <span class="text-[hsl(var(--accent))] text-lg sm:text-xl roboto-medium block">
                         Success Track Record
                     </span>
-                            <p class="text-primary-foreground text-lg sm:text-xl roboto-regular mb-6">
+                            <p class="text-primary-foreground text-base sm:text-lg lg:text-xl roboto-regular mb-4 sm:mb-6">
                                 Successfully mentored pilots who secured positions at:
                             </p>
 
-                            <ul class="space-y-4">
-                                <li class="flex gap-3 text-primary-foreground text-lg sm:text-xl">
+                            <ul class="space-y-3 sm:space-y-4">
+                                <li class="flex gap-3 text-primary-foreground text-base sm:text-lg lg:text-xl">
                                     <span class="text-[hsl(var(--accent))]">•</span>
                                     <span class="roboto-regular">
                                 <strong>Legacy Carriers</strong>: British Airways, Virgin Atlantic, Cathay Pacific
                             </span>
                                 </li>
-                                <li class="flex gap-3 text-primary-foreground text-lg sm:text-xl">
+                                <li class="flex gap-3 text-primary-foreground text-base sm:text-lg lg:text-xl">
                                     <span class="text-[hsl(var(--accent))]">•</span>
                                     <span class="roboto-regular">
                                 <strong>Low-Cost Airlines</strong>: Ryanair, EasyJet, Jet2
                             </span>
                                 </li>
-                                <li class="flex gap-3 text-primary-foreground text-lg sm:text-xl">
+                                <li class="flex gap-3 text-primary-foreground text-base sm:text-lg lg:text-xl">
                                     <span class="text-[hsl(var(--accent))]">•</span>
                                     <span class="roboto-regular">
                                 <strong>Cargo Operations</strong>: DHL
                             </span>
                                 </li>
-                                <li class="flex gap-3 text-primary-foreground text-lg sm:text-xl">
+                                <li class="flex gap-3 text-primary-foreground text-base sm:text-lg lg:text-xl">
                                     <span class="text-[hsl(var(--accent))]">•</span>
                                     <span class="roboto-regular">
                                 <strong>National Carriers</strong>: Aer Lingus
@@ -516,8 +516,8 @@
                     </div>
                 </div>
 
-                <!-- CTA Button -->
-                <div class="mt-12 md:mt-16 text-center">
+                <!-- CTA Button - Consistent spacing -->
+                <div class="mt-8 sm:mt-12 md:mt-16 text-center">
                     <AlertDialog.Root>
                         <AlertDialog.Trigger class="ring-0 outline-0 inline-block">
                             <CtaButton/>
