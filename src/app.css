@@ -163,8 +163,9 @@
         @apply roboto-black
     }
     p {
-        @apply text-lg;
+        @apply text-sm sm:text-base md:text-lg;
         @apply roboto-regular;
+        @apply mb-4
     }
 
     strong {
@@ -193,7 +194,6 @@
         @apply leading-4
     }
     #cassidy h3 span:first-child {
-        @apply text-2xl;
         background: linear-gradient(90deg, #FFB62E 4.5%, #FFEE2E 23%, #E0FF2E 43%, #B9FF2E 63.5%, #85FF2E 86.5%);
         background-clip: text;
         -webkit-background-clip: text;

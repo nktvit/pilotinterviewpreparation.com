@@ -27,9 +27,11 @@
     import {ScrollArea} from "$lib/components/ui/scroll-area/index.js";
     import * as Accordion from "$lib/components/ui/accordion/index.js";
     import * as AlertDialog from "$lib/components/ui/alert-dialog/index.js";
-    import {Plane, Phone, Mail} from "lucide-svelte";
+    import {Plane, Phone, Mail, Quote, ChevronLeft, ChevronRight} from "lucide-svelte";
     import Logo from "$lib/components/logo.svelte";
     import CtaButton from "$lib/components/cta-button.svelte";
+    import CtaModal from "$lib/components/cta-modal.svelte";
+    import {fade} from "svelte/transition";
 
 
     // Carousel
@@ -177,20 +179,83 @@
     `,
         }
     ]
+    const testimonials = [
+        {
+            content: "<p class='text-xl'>+1 recommendation for @Denis Cassidy, really useful for pre-interview prep. Good luck 👍🤞</p>",
+            role: "First Officer",
+            name: "Oliver Campbell",
+            airline: "Virgin Atlantic",
+        },
+        {
+            content: "<p>Hi all, just a small review for @Denis Cassidy. Interviews for me have been a bit of a struggle, but Denis was a <strong>fantastic help</strong> for me. He helped me gain confidence for the interview in general and helped me get into the right mindset going into the interview.</p>" +
+                "<p>Highly recommend for anyone approaching final interview or the Zenon interview to give Denis a shout.</p>",
+            role: "First Officer",
+            name: "Angus Hayes",
+            airline: "Virgin Atlantic",
+        },
+        {
+            content: "<p class='text-lg'>If anyone is preparing for their final interview I do strongly recommend contacting @Denis Cassidy. He was a fantastic help to gain confidence and to put me in the right mindset to face the final interview.</p>",
+            role: "First Officer",
+            name: "G. Adriani",
+            airline: "Cathay Pacific Airways",
+        },
+        {
+            content: "<p>I recently had a session with Denis Cassidy about preparation for my interview with one of the best airlines worldwide, Virgin Atlantic. The session with him not only <strong>changes your mindset</strong> to gain the position you are applying for, but gives a lot of advice, tips, points of view and suggestions that will make you perform in a unique way at your interview.</p>" +
+                "<p>All the useful things I learned from him are so crucial that I will bring with me and apply for most of the career goals I will want to achieve in the future. To contact him was a <strong>great choice</strong> that was fundamental for my successful interview. Thank you Denis!</p>",
+            role: "First Officer",
+            name: "Manuel Simone",
+            airline: "ITA Airways SuPra. - Italy",
+        },
+        {
+            content: "<p>I cannot express how grateful I am for the <strong>exceptional interview preparation</strong> I received from Denis Cassidy for my First Officer position. His experience gave me a thorough and insightful view of the aviation industry. The guidance I received was tailored to me and my CV giving me an insight into the skills already present from my experiences.</p>" +
+                "<p>This preparation boosted my confidence and helped me articulate my thoughts more clearly in the interview. Thanks to the fantastic prep I was able to secure the position I wanted. I would <strong>highly recommend</strong> Denis Cassidy's services to anyone looking to excel in their aviation interviews.</p>",
+            role: "First Officer",
+            name: "Richard O'Brien",
+            airline: "AerLingus Regional",
+        },
+        {
+            content: "<p>I recently had the incredible opportunity to work with Denis Cassidy for my interview preparation with Virgin Atlantic. Through this experience, it became crystal clear that Denis possesses a <strong>wealth of knowledge and expertise</strong> that spans decades and continents in the aviation industry. His deep understanding of pilot placement, especially for prestigious airlines like Virgin Atlantic, is both enlightening and motivating.</p>" +
+                "<p>Denis's approach to interview preparation is unparalleled. He emphasizes the critical importance of being thoroughly prepared, making it evident that going into such a process unprepared is a serious disadvantage. The Virgin Atlantic interview, as I learned firsthand from Denis, is unlike any other in the airline industry. It requires not just knowledge and skill but a profound understanding of the company's culture and values, something that Denis was exceptionally equipped to provide guidance on.</p>" +
+                "<p>His mentorship was not just about preparation but about building confidence, fine-tuning strengths, and addressing weaknesses with a positive and constructive outlook. Denis's dedication to aviation and to the success of his candidates shines brightly, offering not just advice but <strong>genuine support and encouragement</strong>.</p>" +
+                "<p>Despite the inherent challenges of the interview process, Denis's guidance was instrumental in my preparedness and mindset. His talent for making complex concepts accessible, combined with his sincere commitment to my success, was a source of inspiration and positivity.</p>" +
+                "<p>For anyone aspiring to a career in aviation, especially with an eye on Virgin Atlantic, Denis Cassidy's guidance is invaluable. His expertise, commitment, and the personalized support he offers are second to none. A heartfelt thank you to Denis for not just preparing me for the interview but for highlighting the importance of comprehensive preparation in facing the unique challenges posed by Virgin Atlantic. Your impact on my journey has been profound.</p>",
+            role: "First Officer",
+            name: "Justin Butler",
+            airline: "Ryanair",
+        },
+        {
+            content: "<p>Hi all. I was recently successful for a different airline. I used Dennis to help me with this. I highly recommend him, even for last minute prep. He has vast knowledge and experience in recruiting airline pilots. And he will give a valuable insight as to what the interviewers are looking for in your interview.</p>" +
+                "<p>All the best and good luck.</p>",
+            role: "First Officer",
+            name: "Karl Trigwell",
+            airline: "DHLI",
+        },
+
+    ];
 
     //  States
+    let testimonialApi = $state(null);
+
     let api = $state(null);
-    let count = $state(0);
-    let current = $state(0);
-    let currentContent = $derived(slides[current]?.content ?? '');
+    let countSlideFeatures = $state(0);
+    let currentSlideFeatures = $state(0);
+    let currentContentFeatures = $derived(slides[currentSlideFeatures]?.content ?? '');
+    const expandedStates = $state(new Array(testimonials.length).fill(false));
+
 
     $effect(() => {
         if (api) {
-            count = api.scrollSnapList().length;
-            current = api.selectedScrollSnap();
+            countSlideFeatures = api.scrollSnapList().length;
+            currentSlideFeatures = api.selectedScrollSnap();
 
             api.on("select", () => {
-                current = api.selectedScrollSnap();
+                currentSlideFeatures = api.selectedScrollSnap();
+            });
+        }
+        if (testimonialApi) {
+            testimonialApi.on("select", () => {
+                // Reset all expanded states when slide changes
+                expandedStates.fill(false);
             });
         }
     });
@@ -204,18 +269,41 @@
         };
     }
 
+    function toggleExpanded(index) {
+        expandedStates[index] = !expandedStates[index];
+    }
+
     function handleKeydown(i, e) {
         if (e.key === 'ArrowRight') {
-            gotoSlide((i + 1) % count)();
+            gotoSlide((i + 1) % countSlideFeatures)();
         } else if (e.key === 'ArrowLeft') {
-            gotoSlide((i - 1 + count) % count)();
+            gotoSlide((i - 1 + countSlideFeatures) % countSlideFeatures)();
         }
+    }
+
+    function getHTMLTextLength(html) {
+        // Create a temporary div
+        const temp = document.createElement('div');
+        // Set the HTML content
+        temp.innerHTML = html;
+        // Get text content (strips all HTML tags)
+        const textContent = temp.textContent || temp.innerText;
+        // Return clean text length
+        return textContent.trim().length;
+    }
+
+    function scrollPrev() {
+        if (testimonialApi) testimonialApi.scrollPrev();
+    }
+
+    function scrollNext() {
+        if (testimonialApi) testimonialApi.scrollNext();
     }
 
 </script>
 
 <div class=" text-center md:text-left bg-[rgb(1,23,55)]">
-    <header class="container mx-auto flex flex-col xs:min-h-[90vh] xs:h-[90vh]
+    <header class="container mx-auto flex flex-col xs:min-h-[90vh] xs:h-[90vh] landscape:sm:min-h-[100vh] landscape:sm:h-[100vh] landscape:lg:min-h-[90vh] landscape:lg:h-[90vh]
     md:max-w-3xl lg:max-w-4xl xl:max-w-5xl 2xl:max-w-7xl relative">
         <!-- Logo with fixed position from top -->
         <div class="pt-5 landscape:md:pt-0 landscape:lg:pt-5">
@@ -224,7 +312,7 @@
 
         <!-- Main content with fixed heights and spacing -->
         <div class="flex-1 flex flex-col landscape:flex-row landscape:lg:flex-col justify-around
-        mt-12 sm:mt-20 md:mt-5
+        mt-12 sm:mt-20 landscape:sm:mt-6 md:mt-5 landscape:md:mt-12 landscape:lg:mt-5
          mb-8 sm:mb-12 md:mb-16
         text-white">
             <!-- Title section with consistent spacing -->
@@ -246,72 +334,7 @@
                             <CtaButton/>
                         </AlertDialog.Trigger>
                     </div>
-                    <AlertDialog.Content
-                            class="w-[90vw] sm:max-w-lg md:max-w-xl lg:max-w-2xl bg-[rgb(1,23,55)] text-white">
-                        <AlertDialog.Header>
-                            <AlertDialog.Title class="text-2xl sm:text-3xl roboto-black text-white">
-                                Book Your Interview Preparation
-                            </AlertDialog.Title>
-                            <AlertDialog.Description
-                                    class="mt-4 roboto-regular text-lg leading-relaxed text-primary-foreground">
-                                Contact us by phone to schedule your personalized interview preparation session:
-                            </AlertDialog.Description>
-                        </AlertDialog.Header>
-
-                        <div class="py-6 space-y-6">
-                            <div class="flex flex-col items-center sm:items-start space-y-3">
-                                <div class="text-xl roboto-medium text-white">Book by Phone</div>
-
-                                <a href="tel:+353868167242"
-                                   class="flex items-center space-x-2 text-xl text-[hsl(var(--accent))] hover:text-[hsl(var(--accent))/90] transition-colors roboto-medium"
-                                >
-                                    <Phone class="h-5 w-5"/>
-                                    <span>+353 868 167 242</span>
-                                </a>
-                            </div>
-
-                            <div class="space-y-2">
-                                <div class="text-sm text-[hsl(var(--muted-foreground))] roboto-medium">
-                                    Available times for calls:
-                                </div>
-                                <div class="text-sm text-primary-foreground roboto-regular">
-                                    Monday - Friday: 9:00 AM - 6:00 PM (Irish Time)
-                                </div>
-                            </div>
-
-                            <div class="space-y-3">
-                                <div class="roboto-medium text-white">What to expect:</div>
-                                <ul class="space-y-2 text-sm text-[hsl(var(--muted-foreground))] roboto-regular">
-                                    <li class="flex items-center space-x-2">
-                                        <span class="text-[hsl(var(--accent))]">•</span>
-                                        <span>Brief discussion of your experience and goals</span>
-                                    </li>
-                                    <li class="flex items-center space-x-2">
-                                        <span class="text-[hsl(var(--accent))]">•</span>
-                                        <span>Overview of available session types</span>
-                                    </li>
-                                    <li class="flex items-center space-x-2">
-                                        <span class="text-[hsl(var(--accent))]">•</span>
-                                        <span>Scheduling your preparation session</span>
-                                    </li>
-                                    <li class="flex items-center space-x-2">
-                                        <span class="text-[hsl(var(--accent))]">•</span>
-                                        <span>Payment details and confirmation</span>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <AlertDialog.Footer class="sm:justify-between flex-col sm:flex-row gap-4">
-                            <div class="text-sm text-[hsl(var(--muted-foreground))] roboto-regular">
-                                We look forward to helping you succeed in your airline interview
-                            </div>
-                            <AlertDialog.Cancel
-                                    class="mt-2 sm:mt-0 bg-[hsl(var(--accent))] text-[hsl(var(--accent-foreground))] hover:bg-[hsl(var(--accent))/90] transition-colors roboto-medium">
-                                Close
-                            </AlertDialog.Cancel>
-                        </AlertDialog.Footer>
-                    </AlertDialog.Content>
+                    <CtaModal/>
                 </AlertDialog.Root>
             </div>
         </div>
@@ -327,7 +350,7 @@
             <div class="absolute inset-0">
                 <div class="relative w-[140%] sm:w-full -left-[40%] sm:left-0 h-full">
                     <ImgParallax
-                            class="w-full h-full object-cover"
+                            class="w-full h-full object-cover parallax-img"
                             factor="0.85"
                             src={planeIrish}
                             alt="Aircraft"
@@ -349,9 +372,9 @@
             </div>
         </section>
 
-        <section class="container mx-auto py-12 sm:max-w-2xl xl:max-w-3xl">
+        <section class="container mx-auto py-12 sm:max-w-xl xl:max-w-2xl">
             <!--desktop only-->
-            <div class="hidden md:block landscape:lg:block mt-12 mx-auto">
+            <div class="hidden portrait:sm:block landscape:lg:block  mt-12 mx-auto">
                 <Carousel.Root
                         setApi={(emblaApi) => (api = emblaApi)}
                         opts={{
@@ -362,7 +385,7 @@
         }}
                         plugins={[
             Autoplay({
-                delay: 10000,
+                delay: 6000,
             }),
             WheelGesturesPlugin({
                 forceWheelAxis: 'x',
@@ -389,7 +412,7 @@
                 </Carousel.Root>
 
                 <div class="hidden text-muted-foreground py-2 text-center text-sm">
-                    Slide {current + 1} of {count}
+                    Slide {currentSlideFeatures + 1} of {countSlideFeatures}
                 </div>
 
                 <ScrollArea class="whitespace-nowrap" orientation="horizontal">
@@ -397,7 +420,7 @@
                         {#each slides as slide, i (i)}
                             <button
                                     class={`text-white box-content focus:ring-0 focus:outline-0 border-b border-muted-foreground py-4 px-3 focus: transition-colors
-                        ${i === current ? "border-b-[2.5px] bg-white/10 border-white" : ""}`}
+                        ${i === currentSlideFeatures ? "border-b-[2.5px] bg-white/10 border-white" : ""}`}
                                     onclick={gotoSlide(i)}
                                     onkeydown={(e) => handleKeydown(i, e)}
                             >
@@ -407,44 +430,48 @@
                     </div>
                 </ScrollArea>
 
-                <div class="sm:h-[350px] w-[70%] mx-auto mt-6 ">
-                    {#if currentContent}
-                        <p class="text-primary-foreground text-2xl">{@html currentContent}</p>
+                <div class="sm:h-[300px] w-[70%] mx-auto mt-6 ">
+                    {#if currentContentFeatures}
+                        <p class="text-primary-foreground text-2xl">{@html currentContentFeatures}</p>
                     {/if}
                 </div>
 
             </div>
 
             <!--mobile only-->
-            <div class="sm:hidden flex flex-col space-y-12">
-                {#each slides as slide, i (i)}
-                    <div class="md:flex-[0_0_70%] min-w-0">
-                        <div class="p-1">
-                            <Img
-                                    class="w-full h-full aspect-square object-cover"
-                                    src={slide.image}
-                                    alt={slide.caption}
-                            />
+            <div class="portrait:sm:hidden landscape:lg:hidden">
+                <div class="grid grid-cols-1 landscape:grid-cols-2 gap-6 sm:gap-8 md:gap-10">
+                    {#each slides as slide, i (i)}
+                        <div class="min-w-0 {slides.length - 1 === i && (i+1) % 2 === 1 ? 'landscape:col-span-2' : ''}">
+                            <div class="p-1 landscape:p-3">
+                                <Img
+                                        class="w-full object-cover aspect-square {slides.length - 1 === i && (i+1) % 2 === 1 ? 'landscape:aspect-[16/9]' : ''}"
+                                        src={slide.image}
+                                        alt={slide.caption}
+                                />
+                            </div>
+                            <span class="block text-left ml-4 mt-1 landscape:text-sm text-primary-foreground">
+                                {slide.caption}
+                            </span>
+                            <div class="p-4">
+                                <h4 class="text-white text-left text-3xl landscape:text-2xl font-medium mt-3 mb-4">{slide.title}</h4>
+                                <p class="text-primary-foreground text-left text-xl landscape:text-lg">{@html slide.content}</p>
+                            </div>
                         </div>
-                        <span class="block text-left ml-4 mt-1 text-primary-foreground">
-                                    {slide.caption}
-                                </span>
-                        <div class="p-4">
-                            <h4 class="text-white text-left text-3xl font-medium mt-3 mb-4">{slide.title}</h4>
-                            <p class="text-primary-foreground text-left text-xl">{@html slide.content}</p>
-                        </div>
-                    </div>
-                {/each}
-
+                    {/each}
+                </div>
             </div>
 
         </section>
-        <section class="container mx-auto flex flex-col md:max-w-3xl lg:max-w-4xl xl:max-w-5xl 2xl:max-w-7xl py-8 sm:py-12 md:py-16" id="cassidy">
+        <section
+                class="container mx-auto flex flex-col md:max-w-3xl lg:max-w-4xl xl:max-w-5xl 2xl:max-w-7xl py-8 sm:py-12 md:py-16
+                text-left"
+                id="cassidy">
             <div class="flex-1 flex flex-col">
                 <!-- Title Section - Improved spacing and responsive typography -->
                 <div class="text-center mb-8 sm:mb-12 md:mb-16">
                     <h3 class="roboto-black uppercase leading-relaxed">
-                        <span class="text-xl sm:text-2xl lg:text-3xl text-[hsl(var(--accent))] block mb-2">30+ years of experience</span>
+                        <span class="text-2xl sm:text-3xl lg:text-4xl text-[hsl(var(--accent))] block mb-2">30+ years of experience</span>
                         <span class="text-2xl sm:text-3xl lg:text-4xl text-[#f3f3f3]">In pilot assessment</span>
                     </h3>
                 </div>
@@ -471,9 +498,12 @@
                     <span class="text-[hsl(var(--accent))] text-lg sm:text-xl roboto-medium block">
                         Background
                     </span>
-                            <p class="text-primary-foreground text-base sm:text-lg lg:text-xl roboto-regular leading-relaxed">
-                                Pilot assessment and selection consultant with extensive airline and ATO experience across
-                                <strong>Europe and Middle East</strong> carriers. Specialised in delivering personalіsed interview preparation via <strong>Teams</strong>, tailored to your specific CV and target airline.
+                            <p class="text-primary-foreground sm:text-lg lg:text-xl roboto-regular leading-relaxed">
+                                Pilot assessment and selection consultant with extensive airline and ATO experience
+                                across
+                                <strong>Europe and Middle East</strong> carriers. Specialised in delivering personalіsed
+                                interview preparation via <strong>Teams</strong>, tailored to your specific CV and
+                                target airline.
                             </p>
                         </div>
 
@@ -482,30 +512,30 @@
                     <span class="text-[hsl(var(--accent))] text-lg sm:text-xl roboto-medium block">
                         Success Track Record
                     </span>
-                            <p class="text-primary-foreground text-base sm:text-lg lg:text-xl roboto-regular mb-4 sm:mb-6">
+                            <p class="text-primary-foreground sm:text-lg lg:text-xl roboto-regular mb-4 sm:mb-6">
                                 Successfully mentored pilots who secured positions at:
                             </p>
 
                             <ul class="space-y-3 sm:space-y-4">
-                                <li class="flex gap-3 text-primary-foreground text-base sm:text-lg lg:text-xl">
+                                <li class="flex gap-3 text-primary-foreground sm:text-lg lg:text-xl">
                                     <span class="text-[hsl(var(--accent))]">•</span>
                                     <span class="roboto-regular">
                                 <strong>Legacy Carriers</strong>: British Airways, Virgin Atlantic, Cathay Pacific
                             </span>
                                 </li>
-                                <li class="flex gap-3 text-primary-foreground text-base sm:text-lg lg:text-xl">
+                                <li class="flex gap-3 text-primary-foreground sm:text-lg lg:text-xl">
                                     <span class="text-[hsl(var(--accent))]">•</span>
                                     <span class="roboto-regular">
                                 <strong>Low-Cost Airlines</strong>: Ryanair, EasyJet, Jet2
                             </span>
                                 </li>
-                                <li class="flex gap-3 text-primary-foreground text-base sm:text-lg lg:text-xl">
+                                <li class="flex gap-3 text-primary-foreground sm:text-lg lg:text-xl">
                                     <span class="text-[hsl(var(--accent))]">•</span>
                                     <span class="roboto-regular">
                                 <strong>Cargo Operations</strong>: DHL
                             </span>
                                 </li>
-                                <li class="flex gap-3 text-primary-foreground text-base sm:text-lg lg:text-xl">
+                                <li class="flex gap-3 text-primary-foreground sm:text-lg lg:text-xl">
                                     <span class="text-[hsl(var(--accent))]">•</span>
                                     <span class="roboto-regular">
                                 <strong>National Carriers</strong>: Aer Lingus
@@ -519,9 +549,12 @@
                 <!-- CTA Button - Consistent spacing -->
                 <div class="mt-8 sm:mt-12 md:mt-16 text-center">
                     <AlertDialog.Root>
-                        <AlertDialog.Trigger class="ring-0 outline-0 inline-block">
-                            <CtaButton/>
-                        </AlertDialog.Trigger>
+                        <div class="text-center md:text-left">
+                            <AlertDialog.Trigger class="ring-0 outline-0 inline-block">
+                                <CtaButton/>
+                            </AlertDialog.Trigger>
+                        </div>
+                        <CtaModal/>
                     </AlertDialog.Root>
                 </div>
             </div>
@@ -590,7 +623,94 @@
                 </div>
             </div>
         </section>
-        <section class="container mx-auto py-12 sm:max-w-xl md:max-w-2xl lg:max-w-3xl">
+
+        <section class="container mx-auto flex flex-col py-8 sm:py-12 md:py-16">
+            <!-- Title remains the same -->
+            <div class="relative group touch-pan-y">
+                <Carousel.Root
+                        setApi={(emblaApi) => (testimonialApi = emblaApi)}
+                        opts={{
+                align: "center",
+                loop: true,
+                duration: 30,
+                containScroll: false,
+                slidesInView: 3
+            }}
+                        plugins={[
+                Autoplay({
+                    delay: 6000,
+                }),
+                WheelGesturesPlugin({
+                    forceWheelAxis: 'x',
+                })
+            ]}
+                        class="w-full px-2 sm:px-4 md:px-8"
+                >
+                    <div class="absolute -left-2 top-1/2 -translate-y-1/2 z-10">
+                        <button
+                                class="p-2 rounded-full bg-[rgb(1,23,55)]/80 text-white hover:bg-[rgb(1,23,55)] transition-colors duration-200 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-[hsl(var(--accent))]"
+                                onclick={scrollPrev}
+                                aria-label="Previous testimonial"
+                        >
+                            <ChevronLeft class="h-6 w-6"/>
+                        </button>
+                    </div>
+
+                    <div class="absolute right-2 top-1/2 -translate-y-1/2 z-10">
+                        <button
+                                class="p-2 rounded-full bg-[rgb(1,23,55)]/80 text-white hover:bg-[rgb(1,23,55)] transition-colors duration-200 backdrop-blur-sm focus:outline-none focus:ring-2 focus:ring-[hsl(var(--accent))]"
+                                onclick={scrollNext}
+                                aria-label="Next testimonial"
+                        >
+                            <ChevronRight class="h-6 w-6"/>
+                        </button>
+                    </div>
+                    <Carousel.Content role="region" aria-label="Testimonials carousel" class="gap-4">
+                        {#each testimonials as testimonial, i (i)}
+                            <Carousel.Item
+                                    class="min-w-0 portrait:md:basis-1/2 landscape:xl:basis-1/3 md:p-4"
+                                    role="group"
+                                    aria-label={`Testimonial ${i + 1} of ${testimonials.length}`}
+                            >
+                                <Card.Root class="h-full bg-[rgb(1,23,55)] transition-shadow hover:shadow-lg">
+                                    <Card.Content class="h-full flex flex-col p-3 sm:p-6 md:p-8">
+                                        <figure class="flex flex-col h-full">
+                                            <blockquote class="flex-1 text-primary-foreground text-left">
+                                                <div class="flex justify-start mb-2 sm:mb-4" aria-hidden="true">
+                                                    <Quote class="h-5 w-5 sm:h-6 sm:w-6 md:h-8 md:w-8 text-[hsl(var(--accent))]"/>
+                                                </div>
+                                                <div class="custom-scrollbar space-y-2 overflow-y-auto max-h-[250px] sm:max-h-[300px] landscape:sm:max-h-[15vw] pr-2">
+                                                    <div class="text-base sm:text-lg leading-relaxed px-2 pt-2">
+                                                        {@html testimonial.content}
+                                                    </div>
+                                                </div>
+                                            </blockquote>
+
+                                            <figcaption
+                                                    class="mt-4 sm:mt-6 pt-4 sm:pt-6 border-t border-[hsl(var(--accent))]/20">
+                                                <cite class="not-italic">
+                                                    <div class="text-base sm:text-lg md:text-xl roboto-medium text-white">
+                                                        {testimonial.name}
+                                                    </div>
+                                                    <div class="text-sm sm:text-base md:text-lg text-[hsl(var(--accent))] roboto-medium">
+                                                        {testimonial.role}
+                                                    </div>
+                                                    <div class="text-xs sm:text-sm md:text-base text-primary-foreground/80 roboto-regular">
+                                                        {testimonial.airline}
+                                                    </div>
+                                                </cite>
+                                            </figcaption>
+                                        </figure>
+                                    </Card.Content>
+                                </Card.Root>
+                            </Carousel.Item>
+                        {/each}
+                    </Carousel.Content>
+                </Carousel.Root>
+            </div>
+        </section>
+
+        <section class="container mx-auto py-12 mb-24 sm:max-w-xl md:max-w-2xl lg:max-w-3xl">
             <h3 class="text-white text-center text-3xl font-medium">
                 FAQ
             </h3>
@@ -672,9 +792,32 @@
         isolation: isolate;
     }
 
-    /* Optional: Add smooth transition for parallax effect */
-    :global(.parallax-img) {
+    .parallax-img {
         transition: transform 50ms linear;
         will-change: transform;
+    }
+
+    /* Custom scrollbar styles */
+    .custom-scrollbar {
+        scrollbar-width: thin;
+        scrollbar-color: hsl(var(--accent)) transparent;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar {
+        width: 8px;
+        background-color: transparent;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+        background-color: hsl(var(--accent));
+        border-radius: 4px;
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+        background-color: hsl(var(--accent) / 0.8);
+    }
+
+    .custom-scrollbar::-webkit-scrollbar-track {
+        background-color: transparent;
     }
 </style>
