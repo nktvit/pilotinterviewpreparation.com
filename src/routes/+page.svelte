@@ -774,7 +774,7 @@
                                     href="mailto:dencas@pilotinterviewpreparation.com"
                                     class="hover:text-primary/80 transition-colors"
                             >
-                                info@pilotinterviewpreperation.com
+                                info@pilotinterviewpreparation.com
                             </a>
                         </div>
                     </div>

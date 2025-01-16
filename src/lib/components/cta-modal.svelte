@@ -38,12 +38,12 @@ import * as AlertDialog from "$lib/components/ui/alert-dialog/index.js";
             <div class="flex flex-col items-center sm:items-start space-y-3 landscape:space-y-2">
                 <h3 class="text-lg roboto-medium text-white">Or Email</h3>
 
-                <a href="mailto:info@pilotinterviewpreperation.com"
+                <a href="mailto:info@pilotinterviewpreparation.com"
                    class="group flex items-center space-x-2 text-lg sm:text-xl text-[hsl(var(--accent))] hover:text-[hsl(var(--accent))/90] transition-colors roboto-medium p-2 hover:bg-white/5 rounded-lg"
                    aria-label="Call us at +353 868 167 242"
                 >
                     <Phone class="h-5 w-5 group-hover:scale-110 transition-transform"/>
-                    <span>info@pilotinterviewpreperation.com</span>
+                    <span>info@pilotinterviewpreparation.com</span>
                 </a>
             </div>
 
