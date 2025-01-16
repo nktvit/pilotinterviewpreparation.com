@@ -43,7 +43,7 @@ import * as AlertDialog from "$lib/components/ui/alert-dialog/index.js";
                    aria-label="Call us at +353 868 167 242"
                 >
                     <Phone class="h-5 w-5 group-hover:scale-110 transition-transform"/>
-                    <span>info@pilotinterviewpreperation.com</span>
+                    <span>info@pilotinterviewpreparation.com</span>
                 </a>
             </div>
 
