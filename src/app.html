@@ -1,12 +1,85 @@
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" href="%sveltekit.assets%/favicon.png" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		%sveltekit.head%
-	</head>
-	<body data-sveltekit-preload-data="hover">
-		<div style="display: contents">%sveltekit.body%</div>
-	</body>
+<head>
+    <meta charset="utf-8"/>
+    <link rel="icon" href="%sveltekit.assets%/favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    %sveltekit.head%
+    <!-- Optional: Structured Data -->
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "ProfessionalService",
+            "name": "Pilot Interview Preparation by Denis Cassidy",
+            "url": "https://www.pilotinterviewpreparation.com",
+            "logo": "https://www.pilotinterviewpreparation.com/logo.png",
+            "description": "Expert pilot interview preparation services with 30+ years experience helping pilots secure positions at major airlines.",
+            "address": {
+                "@type": "PostalAddress",
+                "addressCountry": "Ireland"
+            },
+            "telephone": "+353868167242",
+            "email": "info@pilotinterviewpreparation.com",
+            "founder": {
+                "@type": "Person",
+                "name": "Denis Cassidy",
+                "jobTitle": "Pilot Assessment and Selection Consultant"
+            },
+            "makesOffer": [
+                {
+                    "@type": "Service",
+                    "name": "Airline Interview Preparation",
+                    "description": "Personalized interview preparation for airline pilots"
+                },
+                {
+                    "@type": "Service",
+                    "name": "Pilot CV Enhancement",
+                    "description": "Professional CV writing for airline pilot applications"
+                }
+            ],
+            "aggregateRating": {
+                "@type": "AggregateRating",
+                "ratingValue": "5",
+                "reviewCount": "7"
+            }
+        }
+    </script>
+
+    <!-- Additional local business information -->
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+                {
+                    "@type": "Question",
+                    "name": "How long is the preparation session?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Each preparation session lasts up to 2 hours, with additional time for follow-up questions. This allows for comprehensive coverage of airline-specific scenarios, competency framework, and personalized feedback on your responses."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "When should I schedule my preparation?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "Ideally, schedule your session 2-3 weeks before your airline interview. This gives you enough time to implement feedback, practice techniques, and refine your responses while keeping the material fresh in your mind."
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "What airlines do you prepare pilots for?",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "We provide preparation for major European and Middle Eastern carriers, including flag carriers, low-cost operators, and regional airlines. Our interview scenarios and competency frameworks are regularly updated through our network of successful candidates."
+                    }
+                }
+            ]
+        }
+    </script>
+</head>
+<body data-sveltekit-preload-data="hover">
+<div style="display: contents">%sveltekit.body%</div>
+</body>
 </html>

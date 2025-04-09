@@ -22,21 +22,21 @@
     import Img, {FxParallax as ImgParallax} from '@zerodevx/svelte-img'
 
     // Components
-    import * as Card from "$lib/components/ui/card/index.js";
-    import {Separator} from "$lib/components/ui/separator/index.js";
-    import {ScrollArea} from "$lib/components/ui/scroll-area/index.js";
-    import * as Accordion from "$lib/components/ui/accordion/index.js";
-    import * as AlertDialog from "$lib/components/ui/alert-dialog/index.js";
-    import {Plane, Phone, Mail, Quote, ChevronLeft, ChevronRight} from "lucide-svelte";
-    import Logo from "$lib/components/logo.svelte";
-    import CtaButton from "$lib/components/cta-button.svelte";
-    import CtaModal from "$lib/components/cta-modal.svelte";
-    import {fade} from "svelte/transition";
+    import * as Card from "$lib/components/ui/card/index.js"
+    import {Separator} from "$lib/components/ui/separator/index.js"
+    import {ScrollArea} from "$lib/components/ui/scroll-area/index.js"
+    import * as Accordion from "$lib/components/ui/accordion/index.js"
+    import * as AlertDialog from "$lib/components/ui/alert-dialog/index.js"
+    import {Plane, Phone, Mail, Quote, ChevronLeft, ChevronRight} from "lucide-svelte"
+    import Logo from "$lib/components/logo.svelte"
+    import CtaButton from "$lib/components/cta-button.svelte"
+    import CtaModal from "$lib/components/cta-modal.svelte"
+    import {fade} from "svelte/transition"
 
 
     // Carousel
-    import * as Carousel from "$lib/components/ui/carousel/index.js";
-    import Autoplay from "embla-carousel-autoplay";
+    import * as Carousel from "$lib/components/ui/carousel/index.js"
+    import Autoplay from "embla-carousel-autoplay"
     import {WheelGesturesPlugin} from 'embla-carousel-wheel-gestures'
 
     // Data
@@ -151,7 +151,7 @@
             question: "What's included in the preparation package?",
             answer: "Your package includes a 2-hour personalized session, CV review, competency framework guidance, current airline-specific scenarios, group exercise strategies, and post-session support until your interview date."
         }
-    ];
+    ]
     const preparationMatters = [
         {
             title: "Interview Structure",
@@ -231,73 +231,73 @@
             airline: "DHLI",
         },
 
-    ];
+    ]
 
     //  States
-    let testimonialApi = $state(null);
+    let testimonialApi = $state(null)
 
-    let api = $state(null);
-    let countSlideFeatures = $state(0);
-    let currentSlideFeatures = $state(0);
-    let currentContentFeatures = $derived(slides[currentSlideFeatures]?.content ?? '');
-    const expandedStates = $state(new Array(testimonials.length).fill(false));
+    let api = $state(null)
+    let countSlideFeatures = $state(0)
+    let currentSlideFeatures = $state(0)
+    let currentContentFeatures = $derived(slides[currentSlideFeatures]?.content ?? '')
+    const expandedStates = $state(new Array(testimonials.length).fill(false))
 
 
     $effect(() => {
         if (api) {
-            countSlideFeatures = api.scrollSnapList().length;
-            currentSlideFeatures = api.selectedScrollSnap();
+            countSlideFeatures = api.scrollSnapList().length
+            currentSlideFeatures = api.selectedScrollSnap()
 
             api.on("select", () => {
-                currentSlideFeatures = api.selectedScrollSnap();
-            });
+                currentSlideFeatures = api.selectedScrollSnap()
+            })
         }
         if (testimonialApi) {
             testimonialApi.on("select", () => {
                 // Reset all expanded states when slide changes
-                expandedStates.fill(false);
-            });
+                expandedStates.fill(false)
+            })
         }
-    });
+    })
 
     function gotoSlide(i) {
         return () => {
             if (api) {
-                api.scrollTo(i);
-                api.plugins()?.autoplay?.stop();
+                api.scrollTo(i)
+                api.plugins()?.autoplay?.stop()
             }
-        };
+        }
     }
 
     function toggleExpanded(index) {
-        expandedStates[index] = !expandedStates[index];
+        expandedStates[index] = !expandedStates[index]
     }
 
     function handleKeydown(i, e) {
         if (e.key === 'ArrowRight') {
-            gotoSlide((i + 1) % countSlideFeatures)();
+            gotoSlide((i + 1) % countSlideFeatures)()
         } else if (e.key === 'ArrowLeft') {
-            gotoSlide((i - 1 + countSlideFeatures) % countSlideFeatures)();
+            gotoSlide((i - 1 + countSlideFeatures) % countSlideFeatures)()
         }
     }
 
     function getHTMLTextLength(html) {
         // Create a temporary div
-        const temp = document.createElement('div');
+        const temp = document.createElement('div')
         // Set the HTML content
-        temp.innerHTML = html;
+        temp.innerHTML = html
         // Get text content (strips all HTML tags)
-        const textContent = temp.textContent || temp.innerText;
+        const textContent = temp.textContent || temp.innerText
         // Return clean text length
-        return textContent.trim().length;
+        return textContent.trim().length
     }
 
     function scrollPrev() {
-        if (testimonialApi) testimonialApi.scrollPrev();
+        if (testimonialApi) testimonialApi.scrollPrev()
     }
 
     function scrollNext() {
-        if (testimonialApi) testimonialApi.scrollNext();
+        if (testimonialApi) testimonialApi.scrollNext()
     }
 
 </script>
@@ -307,17 +307,19 @@
     md:max-w-3xl lg:max-w-4xl xl:max-w-5xl 2xl:max-w-7xl relative">
         <!-- Logo with fixed position from top -->
         <div class="pt-5 landscape:md:pt-0 landscape:lg:pt-5">
-            <Logo class="text-white fill-white"/>
+            <a href="/" aria-label="Pilot Interview Preparation Home">
+                <Logo class="text-white fill-white"/>
+            </a>
         </div>
 
-        <!-- Main content with fixed heights and spacing -->
+        <!-- Main content with semantic heading hierarchy -->
         <div class="flex-1 flex flex-col landscape:flex-row landscape:lg:flex-col justify-around
         mt-12 sm:mt-20 landscape:sm:mt-6 md:mt-5 landscape:md:mt-12 landscape:lg:mt-5
          mb-8 sm:mb-12 md:mb-16
         text-white">
             <!-- Title section with consistent spacing -->
             <div class="flex-grow-0">
-                <h1 class="">
+                <h1>
                     Land your<br/>dream<br/>airline Job
                 </h1>
             </div>
@@ -330,7 +332,7 @@
                 </h2>
                 <AlertDialog.Root>
                     <div class="text-center md:text-left">
-                        <AlertDialog.Trigger class="ring-0 outline-0 inline-block">
+                        <AlertDialog.Trigger class="ring-0 outline-0 inline-block" aria-label="Book your Teams session">
                             <CtaButton/>
                         </AlertDialog.Trigger>
                     </div>
@@ -351,7 +353,7 @@
                 <div class="relative w-[140%] sm:w-full -left-[40%] sm:left-0 h-full">
                     <ImgParallax
                             class="w-full h-full object-cover parallax-img"
-                            factor="0.85"
+                            factor="0.75"
                             src={planeIrish}
                             alt="Aircraft"
                     />
