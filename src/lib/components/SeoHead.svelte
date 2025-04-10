@@ -21,12 +21,11 @@
     <!--    <meta property="twitter:description" content="Personalized pilot interview preparation with 30+ years experience. Book your Teams session and land your dream airline job." />-->
     <!--    <meta property="twitter:image" content="https://www.pilotinterviewpreparation.com/og-image.jpg" />-->
 
-    <!-- Favicon -->
-    <!--    <link rel="icon" type="image/png" href="/favicon.png" />-->
-    <!--    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />-->
-    <!--    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />-->
-    <!--    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />-->
-    <!--    <link rel="manifest" href="/site.webmanifest" />-->
+        <link rel="icon" type="image/png" href="/favicon.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+<!--        <link rel="manifest" href="/site.webmanifest" />-->
 
 
     <!-- Canonical URL -->
