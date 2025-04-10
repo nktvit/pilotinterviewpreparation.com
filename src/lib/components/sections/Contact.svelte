@@ -237,7 +237,7 @@
                             <span class="text-white/60 text-sm">Closed</span>
                         </div>
                         <div class="text-white/60 text-xs pt-4">
-                            All times are Irish Standard Time (GMT+1)
+                            All times are Irish Time (GMT)
                         </div>
                     </div>
                 </div>

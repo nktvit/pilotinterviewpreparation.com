@@ -37,7 +37,6 @@ export default {
 
 		try {
 			const apiKey = env.RESEND_API_KEY
-			console.log("API Key:", apiKey)
 			// Parse the form data
 			const formData = await request.json()
 
@@ -66,7 +65,7 @@ export default {
 				},
 				body: JSON.stringify({
 					from: "Pilot Interview Preparation <onboarding@resend.dev>",
-					to: "info@pilotinterviewpreparation.com",
+					to: "nikita.vitkovsky@icloud.com", // temporary info@pilotinterviewpreparation.com
 					reply_to: formData.email,
 					subject: `New Inquiry from ${formData.name} - Pilot Interview Preparation`,
 					html: `
