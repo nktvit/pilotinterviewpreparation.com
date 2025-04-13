@@ -1,8 +1,7 @@
 <script>
     import Logo from "$lib/components/logo.svelte";
-    import {Plane, CheckCircle, Award, Users, Calendar, TrendingUp} from "lucide-svelte";
+    import {Plane, CheckCircle, Award, Users, Calendar, TrendingUp, Star} from "lucide-svelte";
     import {fly, fade} from "svelte/transition";
-    import AirlineLogos from "./AirlineLogos.svelte";
 
     const benefits = [
         {
@@ -11,7 +10,7 @@
         },
         {
             icon: Award,
-            text: "90% Success Rate with Major Airlines"
+            text: "80% Success Rate with Major Airlines"
         },
         {
             icon: Users,
@@ -25,8 +24,15 @@
 
     const stats = [
         { value: "30+", label: "Years Experience" },
-        { value: "500+", label: "Pilots Placed" },
+        { value: "100+", label: "Pilots Placed" },
         { value: "8+", label: "Major Airlines" }
+    ];
+
+    const highlights = [
+        "Technical Knowledge",
+        "Competency-Based Questions",
+        "Group Exercises",
+        "Simulator Assessment"
     ];
 </script>
 
@@ -86,9 +92,17 @@
                 </ul>
 
                 <div class="hidden md:block">
-
-                    <p class="text-white/70 text-sm mb-2 ">Trusted by pilots from:</p>
-                    <AirlineLogos />
+                    <p class="text-white/70 text-sm mb-2">Comprehensive Preparation For:</p>
+                    <div class="flex flex-wrap gap-2">
+                        {#each highlights as item, i}
+                            <div
+                                class="bg-white/10 px-3 py-1 rounded-full border border-white/20 text-white/90 text-sm"
+                                in:fade={{delay: 1000 + (i * 100), duration: 400}}
+                            >
+                                <Star class="h-3 w-3 inline-block mr-1 text-[hsl(var(--accent))]" /> {item}
+                            </div>
+                        {/each}
+                    </div>
                 </div>
             </div>
 
@@ -126,11 +140,11 @@
                         <TrendingUp class="h-4 w-4 mr-2 text-[hsl(var(--accent))]" />
                         <span class="text-sm text-white/80">Success Rate</span>
                     </div>
-                    <div class="font-bold text-[hsl(var(--accent))]">90%</div>
+                    <div class="font-bold text-[hsl(var(--accent))]">80%</div>
                 </div>
 
                 <div class="w-full bg-white/10 rounded-full h-2 mb-6">
-                    <div class="bg-[hsl(var(--accent))] h-2 rounded-full" style="width: 90%"></div>
+                    <div class="bg-[hsl(var(--accent))] h-2 rounded-full" style="width: 80%"></div>
                 </div>
 
                 <div class="flex items-start space-x-3 mt-6 p-3 bg-white/5 rounded-lg">

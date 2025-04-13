@@ -63,7 +63,7 @@
                         <li class="flex gap-3 text-primary-foreground sm:text-lg lg:text-xl">
                             <span class="text-[hsl(var(--accent))]">•</span>
                             <span class="roboto-regular">
-                        <strong>Legacy Carriers</strong>: British Airways, Virgin Atlantic, Cathay Pacific
+                        <strong>Legacy Carriers</strong>: British Airways, Virgin Atlantic, Cathay Pacific, Etihad Airways, Gulf Air, Saudi Airlines
                     </span>
                         </li>
                         <li class="flex gap-3 text-primary-foreground sm:text-lg lg:text-xl">
@@ -81,7 +81,7 @@
                         <li class="flex gap-3 text-primary-foreground sm:text-lg lg:text-xl">
                             <span class="text-[hsl(var(--accent))]">•</span>
                             <span class="roboto-regular">
-                        <strong>National Carriers</strong>: Aer Lingus
+                        <strong>National Carriers</strong>: Aer Lingus, Emerald Airlines
                     </span>
                         </li>
                     </ul>

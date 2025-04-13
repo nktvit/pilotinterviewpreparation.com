@@ -2,17 +2,21 @@
     import Img from '@zerodevx/svelte-img';
     import * as Carousel from "$lib/components/ui/carousel/index.js";
     import Autoplay from "embla-carousel-autoplay";
-    
+
     // Logos
     import aerLingus from '$lib/assets/logos/aer-lingus.png?as=run:0';
     import britishAirways from '$lib/assets/logos/british-airways.png?as=run:0';
     import cathayPacific from '$lib/assets/logos/cathay-pacific.png?as=run:0';
     import dhl from '$lib/assets/logos/dhl.png?as=run:0';
     import easyJet from '$lib/assets/logos/easy-jet.png?as=run:0';
+    import etihadAirways from '$lib/assets/logos/etihad-airways.png?as=run:0';
+    import gulfAir from '$lib/assets/logos/gulf-air.png?as=run:0';
     import jet2 from '$lib/assets/logos/jet2.png?as=run:0';
     import ryanair from '$lib/assets/logos/ryanair.png?as=run:0';
     import virginAtlantic from '$lib/assets/logos/virgin-atlantic.png?as=run:0';
-    
+    import saudiAirlines from '$lib/assets/logos/saudia-airlines.png?as=run:0';
+    import emeraldAirlines from '$lib/assets/logos/emerald-airlines.png?as=run:0';
+
     const airlines = [
         {
             title: "British Airways",
@@ -25,6 +29,22 @@
         {
             title: "Cathay Pacific",
             image: cathayPacific
+        },
+        {
+            title: "Etihad Airways",
+            image: etihadAirways
+        },
+        {
+            title: "Gulf Air",
+            image: gulfAir
+        },
+        {
+            title: "Saudi Airlines",
+            image: saudiAirlines
+        },
+        {
+            title: "Emerald Airlines",
+            image: emeraldAirlines
         },
         {
             title: "DHL",

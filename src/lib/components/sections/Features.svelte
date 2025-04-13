@@ -4,14 +4,14 @@
     import {ScrollArea} from "$lib/components/ui/scroll-area/index.js";
     import Autoplay from "embla-carousel-autoplay";
     import {WheelGesturesPlugin} from 'embla-carousel-wheel-gestures';
-    
+
     // Images
     import examinationCenter from '$lib/assets/examination-center.png?normalize&as=run';
     import cvWriting from '$lib/assets/cv-writing.jpg?as=run';
     import planeIrish from '$lib/assets/plane-irish.jpg?as=run';
     import groupTraining from '$lib/assets/group-training.png?as=run';
     import professionalDevelopment from '$lib/assets/professional-development.jpg?as=run';
-    
+
     // Data
     export const slides = [
         {
@@ -28,7 +28,7 @@
         {
             title: "CV Enhancement",
             content: `
-            <span>Powerful&nbsp;<strong>airline pilot CV</strong>&nbsp;that aligns with recruitment systems and catches attention. Your flying experience will be presented to match exactly what airlines want to see. We'll transform your career highlights into compelling achievements that showcase your true potential as a candidate.</span><p><br></p>
+            <span>A powerful&nbsp;<strong>Curriculum Vitae</strong>&nbsp;that presents your&nbsp;<strong>career development</strong>&nbsp;in a professional manner is a great start to achieving your goals. Its important that a recruiter receives a CV that presents your complete personal history and flying experience in a way that identifies you a suitable candidate for the&nbsp;<strong>airlines needs</strong>.</span><p><br></p>
             `,
             caption: "CV development",
             image: cvWriting
