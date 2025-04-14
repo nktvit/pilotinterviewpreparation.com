@@ -80,8 +80,8 @@
                         </div>
                         <h3 class="text-xl text-white mb-2">Message Sent Successfully!</h3>
                         <p class="text-primary-foreground">We'll get back to you shortly to confirm your session.</p>
-<!--                        Optional (maybe not required)-->
-<!--                        <p class="text-primary-foreground mt-2">A confirmation email has been sent to your email address.</p>-->
+                        <!--                        Optional (maybe not required)-->
+                        <!--                        <p class="text-primary-foreground mt-2">A confirmation email has been sent to your email address.</p>-->
                     </div>
                 {:else}
                     <form onsubmit={handleSubmit} class="space-y-5 md:space-y-6">
@@ -158,7 +158,7 @@
 
                         {#if errorMessage}
                             <div class="p-3 bg-red-500/20 border border-red-500/30 rounded-md text-white flex items-start gap-2">
-                                <AlertCircle class="h-5 w-5 text-red-400 flex-shrink-0 mt-0.5" />
+                                <AlertCircle class="h-5 w-5 text-red-400 flex-shrink-0 mt-0.5"/>
                                 <span>{errorMessage}</span>
                             </div>
                         {/if}
@@ -169,9 +169,12 @@
                                 disabled={isSubmitting}
                         >
                             {#if isSubmitting}
-                                <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-black" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-black"
+                                     xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor"
+                                            stroke-width="4"></circle>
+                                    <path class="opacity-75" fill="currentColor"
+                                          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                                 </svg>
                                 Sending...
                             {:else}
@@ -212,7 +215,7 @@
                             <div class="h-9 w-9 md:h-10 md:w-10 rounded-full bg-[hsl(var(--accent))]/10 flex items-center justify-center group-hover:bg-[hsl(var(--accent))]/20 transition-colors">
                                 <Mail class="h-4 w-4 md:h-5 md:w-5 text-[hsl(var(--accent))]"/>
                             </div>
-                            <div class="text-sm md:text-base break-words">info@pilotinterviewpreparation.com</div>
+                            <div class="text-xs">info@pilotinterviewpreparation.com</div>
                         </a>
                     </div>
                 </div>
