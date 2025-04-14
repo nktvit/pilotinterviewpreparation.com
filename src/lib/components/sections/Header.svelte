@@ -10,7 +10,7 @@
         },
         {
             icon: Award,
-            text: "80% Success Rate with Major Airlines"
+            text: "80%+ Success Rate with Major Airlines"
         },
         {
             icon: Users,
@@ -133,18 +133,6 @@
                     >
                         <span class="mr-2">✉️</span> Send a Message
                     </a>
-                </div>
-
-                <div class="flex items-center justify-between mb-4">
-                    <div class="flex items-center">
-                        <TrendingUp class="h-4 w-4 mr-2 text-[hsl(var(--accent))]" />
-                        <span class="text-sm text-white/80">Success Rate</span>
-                    </div>
-                    <div class="font-bold text-[hsl(var(--accent))]">80%</div>
-                </div>
-
-                <div class="w-full bg-white/10 rounded-full h-2 mb-6">
-                    <div class="bg-[hsl(var(--accent))] h-2 rounded-full" style="width: 80%"></div>
                 </div>
 
                 <div class="flex items-start space-x-3 mt-6 p-3 bg-white/5 rounded-lg">
