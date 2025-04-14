@@ -1,5 +1,5 @@
 <script>
-    import {Phone, Mail, Send, Calendar, Clock, Info, Check, AlertCircle} from "lucide-svelte"
+    import {Phone, Mail, Send, Calendar, Info, Check, AlertCircle} from "lucide-svelte"
 
     let formData = $state({
         name: '',
@@ -214,31 +214,6 @@
                             </div>
                             <div class="text-sm md:text-base break-words">info@pilotinterviewpreparation.com</div>
                         </a>
-                    </div>
-                </div>
-
-                <div class="bg-white/5 backdrop-blur-sm rounded-lg p-5 sm:p-6 border border-white/10 shadow-lg">
-                    <h3 class="text-lg md:text-xl text-white mb-4 flex items-center">
-                        <Clock class="h-5 w-5 mr-2 text-[hsl(var(--accent))]"/>
-                        Available Hours
-                    </h3>
-
-                    <div class="space-y-2">
-                        <div class="flex justify-between items-center">
-                            <span class="text-white/80 text-sm">Monday - Friday</span>
-                            <span class="text-[hsl(var(--accent))] text-sm">9:00 AM - 6:00 PM</span>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <span class="text-white/80 text-sm">Saturday</span>
-                            <span class="text-[hsl(var(--accent))] text-sm">By Appointment</span>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <span class="text-white/80 text-sm">Sunday</span>
-                            <span class="text-white/60 text-sm">Closed</span>
-                        </div>
-                        <div class="text-white/60 text-xs pt-4">
-                            All times are Irish Time (GMT)
-                        </div>
                     </div>
                 </div>
 

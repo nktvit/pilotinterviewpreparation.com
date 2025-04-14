@@ -46,18 +46,6 @@ import * as AlertDialog from "$lib/components/ui/alert-dialog/index.js";
                     <span>info@pilotinterviewpreparation.com</span>
                 </a>
             </div>
-
-            <div class="space-y-2">
-                <h4 class="text-sm text-[hsl(var(--muted-foreground))] roboto-medium">
-                    Available times for calls:
-                </h4>
-                <time
-                        class="block text-sm text-primary-foreground roboto-regular"
-                        datetime="09:00-18:00"
-                >
-                    Monday - Friday: 9:00 AM - 6:00 PM (Irish Time)
-                </time>
-            </div>
         </div>
 
         <div class="space-y-3 landscape:flex-1">
