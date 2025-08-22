@@ -96,7 +96,7 @@ export default {
 				},
 				body: JSON.stringify({
 					from: "Pilot Interview Preparation <onboarding@resend.dev>", // Update to your verified domain later
-					to: formData.email,
+					to: 'info@pilotinterviewpreparation.com',
 					subject: "Your Interview Preparation Request",
 					html: `
             <h2>Thank you for your request!</h2>
