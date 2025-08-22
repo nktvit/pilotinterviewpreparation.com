@@ -65,7 +65,7 @@ export default {
 				},
 				body: JSON.stringify({
 					from: "Pilot Interview Preparation <onboarding@resend.dev>",
-					to: "nikita.vitkovsky@icloud.com", // temporary info@pilotinterviewpreparation.com
+					to: "info@pilotinterviewpreparation.com",
 					reply_to: formData.email,
 					subject: `New Inquiry from ${formData.name} - Pilot Interview Preparation`,
 					html: `
