@@ -56,6 +56,6 @@
         </div>
     </div>
     <span class="block py-3.5 text-xs text-center bg-primary">
-         2024 Denis Cassidy. All rights reserved.
+         2025 Denis Cassidy. All rights reserved.
     </span>
 </footer>
