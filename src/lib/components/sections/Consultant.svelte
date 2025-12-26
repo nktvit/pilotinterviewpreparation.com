@@ -1,8 +1,6 @@
 <script>
     import Img from '@zerodevx/svelte-img';
     import planeDenis from '$lib/assets/plane-denis.jpg?as=run';
-    import {Send} from 'lucide-svelte';
-
 </script>
 
 <section class="container mx-auto py-16 px-4" id="cassidy">
@@ -76,12 +74,11 @@
 
                 <!-- CTA -->
                 <div class="pt-4">
-                    <a 
-                        href="#contact" 
+                    <a
+                        href="tel:+353868167242"
                         class="inline-flex items-center bg-[hsl(var(--accent))] hover:bg-[hsl(var(--accent))]/90 text-black font-bold py-3 px-4 rounded-md transition-colors duration-300"
                     >
-                        Get Started
-                        <Send class="h-5 w-5 ml-2"/>
+                        <span class="mr-2">☎️</span> Call Now: +353 868 167 242
                     </a>
                 </div>
             </div>

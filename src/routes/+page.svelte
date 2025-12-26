@@ -8,10 +8,10 @@
     import Consultant from "$lib/components/sections/Consultant.svelte";
     import Airlines from "$lib/components/sections/Airlines.svelte";
     import PrepMatters from "$lib/components/sections/PrepMatters.svelte";
+    import Comparison from "$lib/components/sections/Comparison.svelte";
     import Testimonials from "$lib/components/sections/Testimonials.svelte";
     import FAQ from "$lib/components/sections/FAQ.svelte";
     import Footer from "$lib/components/sections/Footer.svelte";
-    import Contact from "$lib/components/sections/Contact.svelte";
 </script>
 
 <div class="text-center md:text-left bg-[rgb(1,23,55)]">
@@ -23,8 +23,8 @@
         <Consultant />
         <Airlines />
         <PrepMatters />
+        <Comparison />
         <Testimonials />
-        <Contact />
         <FAQ />
     </main>
 

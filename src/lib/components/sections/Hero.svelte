@@ -2,7 +2,6 @@
     import {FxParallax as ImgParallax} from '@zerodevx/svelte-img';
     import planeIrish from '$lib/assets/plane-irish.jpg?as=run';
     import {fly, fade} from 'svelte/transition';
-    import {Send} from 'lucide-svelte';
 </script>
 
 <section id="parallax" class="relative h-[450px] md:h-[600px] lg:h-[700px] xl:h-[800px] overflow-hidden">
@@ -31,12 +30,11 @@
                 </p>
             </div>
             <div class="mt-10 md:mt-12" in:fade={{delay: 600, duration: 400}}>
-                <a 
-                    href="#contact" 
+                <a
+                    href="tel:+353868167242"
                     class="inline-flex items-center bg-[hsl(var(--accent))] hover:bg-[hsl(var(--accent))]/90 text-black font-bold py-3 px-4 rounded-md transition-colors duration-300"
                 >
-                    Get Started
-                    <Send class="h-5 w-5 ml-2"/>
+                    <span class="mr-2">☎️</span> Call Now: +353 868 167 242
                 </a>
             </div>
         </div>

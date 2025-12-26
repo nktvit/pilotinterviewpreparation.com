@@ -119,19 +119,12 @@
                     Book your <strong>Teams session</strong> with an experienced pilot assessment and selection consultant
                 </p>
 
-                <div class="grid grid-cols-1 gap-3 mb-6">
+                <div class="mb-6">
                     <a
                         href="tel:+353868167242"
                         class="flex items-center justify-center bg-[hsl(var(--accent))] hover:bg-[hsl(var(--accent))]/90 transition-colors py-3 px-4 rounded-md text-black font-semibold"
                     >
                         <span class="mr-2">☎️</span> Call Now: +353 868 167 242
-                    </a>
-
-                    <a
-                        href="#contact"
-                        class="flex items-center justify-center bg-white/10 hover:bg-white/20 transition-colors py-3 px-4 rounded-md text-white border border-white/20"
-                    >
-                        <span class="mr-2">✉️</span> Send a Message
                     </a>
                 </div>
 
