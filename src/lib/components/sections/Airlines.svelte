@@ -73,7 +73,7 @@
         opts={{
             align: "start",
             loop: true,
-            duration: 2000,
+            duration: 8000,
             watchDrag: false
           }}
         plugins={[
