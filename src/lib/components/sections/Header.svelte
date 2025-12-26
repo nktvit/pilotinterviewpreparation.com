@@ -141,7 +141,7 @@
         </div>
 
         <div class="hidden md:flex justify-center mb-8">
-            <a href="#features" class="animate-bounce">
+            <a href="#features" class="animate-bounce" aria-label="Scroll to features section">
                 <svg class="w-6 h-6 text-white/60" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
                     <path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
                 </svg>

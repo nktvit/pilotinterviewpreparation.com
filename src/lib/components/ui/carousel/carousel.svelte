@@ -12,48 +12,53 @@
 		...restProps
 	} = $props();
 
-	let carouselState = $state({
-		api: undefined,
+	let api = $state(undefined);
+	let canScrollNext = $state(false);
+	let canScrollPrev = $state(false);
+	let scrollSnaps = $state([]);
+	let selectedIndex = $state(0);
+
+	const carouselState = {
+		get api() { return api; },
+		set api(value) { api = value; },
+		get orientation() { return orientation; },
+		get options() { return opts; },
+		get plugins() { return plugins; },
+		get canScrollNext() { return canScrollNext; },
+		set canScrollNext(value) { canScrollNext = value; },
+		get canScrollPrev() { return canScrollPrev; },
+		set canScrollPrev(value) { canScrollPrev = value; },
+		get scrollSnaps() { return scrollSnaps; },
+		set scrollSnaps(value) { scrollSnaps = value; },
+		get selectedIndex() { return selectedIndex; },
+		set selectedIndex(value) { selectedIndex = value; },
 		scrollPrev,
 		scrollNext,
-		orientation,
-		canScrollNext: false,
-		canScrollPrev: false,
-		handleKeyDown,
-		options: opts,
-		plugins,
-		onInit,
-		scrollSnaps: [],
-		selectedIndex: 0,
 		scrollTo,
-	});
+		handleKeyDown,
+		onInit,
+	};
 
 	setEmblaContext(carouselState);
 
 	function scrollPrev() {
-		carouselState.api?.scrollPrev();
+		api?.scrollPrev();
 	}
+
 	function scrollNext() {
-		carouselState.api?.scrollNext();
+		api?.scrollNext();
 	}
+
 	function scrollTo(index, jump) {
-		carouselState.api?.scrollTo(index, jump);
+		api?.scrollTo(index, jump);
 	}
 
-	function onSelect(api) {
-		if (!api) return;
-		carouselState.canScrollPrev = api.canScrollPrev();
-		carouselState.canScrollNext = api.canScrollNext();
-		carouselState.selectedIndex = api.selectedScrollSnap();
+	function onSelect(emblaApi) {
+		if (!emblaApi) return;
+		canScrollPrev = emblaApi.canScrollPrev();
+		canScrollNext = emblaApi.canScrollNext();
+		selectedIndex = emblaApi.selectedScrollSnap();
 	}
-
-	$effect(() => {
-		if (carouselState.api) {
-			onSelect(carouselState.api);
-			carouselState.api.on("select", onSelect);
-			carouselState.api.on("reInit", onSelect);
-		}
-	});
 
 	function handleKeyDown(e) {
 		if (e.key === "ArrowLeft") {
@@ -65,19 +70,26 @@
 		}
 	}
 
-	$effect(() => {
-		setApi(carouselState.api);
-	});
-
 	function onInit(event) {
-		carouselState.api = event.detail;
-
-		carouselState.scrollSnaps = carouselState.api.scrollSnapList();
+		api = event.detail;
+		scrollSnaps = api.scrollSnapList();
 	}
 
 	$effect(() => {
+		if (api) {
+			onSelect(api);
+			api.on("select", onSelect);
+			api.on("reInit", onSelect);
+		}
+	});
+
+	$effect(() => {
+		setApi(api);
+	});
+
+	$effect(() => {
 		return () => {
-			carouselState.api?.off("select", onSelect);
+			api?.off("select", onSelect);
 		};
 	});
 </script>
